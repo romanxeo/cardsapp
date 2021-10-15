@@ -12,6 +12,8 @@ import { Provider } from 'react-redux';
 
 //coment
 
+//3
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>
