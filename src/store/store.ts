@@ -1,10 +1,20 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunkMiddleware from "redux-thunk";
 import {appReducer} from "./appReducer";
+import {EnterNewPasswordReducer} from "./enterNewPassword";
+import {LogInReducer} from "./logInReducer";
+import {ProfileReducer} from "./profilereducer'";
+import {RecoveryPasswordReducer} from "./recoveryPasswordReducer";
+import {SignUpReducer} from "./signUpReducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 const rootReducer = combineReducers({
     app: appReducer,
+    EnterNewPassword: EnterNewPasswordReducer,
+    LogIn: LogInReducer,
+    Profile: ProfileReducer,
+    RecoveryPassword: RecoveryPasswordReducer,
+    SignUpReducer: SignUpReducer
 })
 
 // непосредственно создаём store
