@@ -7,6 +7,9 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import {store} from "./store/store";
 import { Provider } from 'react-redux';
 
+// commit connection
+
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>
