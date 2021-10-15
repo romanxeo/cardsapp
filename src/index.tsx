@@ -7,6 +7,8 @@ import { HashRouter } from 'react-router-dom';
 import {store} from "./store/store";
 import { Provider } from 'react-redux';
 
+//coment
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>
