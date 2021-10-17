@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import s from './RecoveryPassword.module.css';
+import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
 import iconEmail from '../../assets/icon/iconEmail.png'
 import TextField  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { Dispatch } from 'redux'
-
 import { NavLink } from 'react-router-dom';
-import { cardsAPI } from '../../api/cardsAPI';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import { forgotPasswordTC } from '../../store/recoveryPasswordReducer';
@@ -52,13 +49,13 @@ function RecoveryPassword() {
 
     if (completed) {
         return (
-            <div className={s.background}>
-                <div className={s.blockContainer}>
-                    <div className={s.form}>
-                        <h2 className={s.text}>It-incubator</h2>
+            <div className={cs.background}>
+                <div className={cs.blockContainer}>
+                    <div className={cs.form}>
+                        <h2 className={cs.text}>It-incubator</h2>
                         <img src={iconEmail} className={s.icon}/>
-                        <h3 className={s.text}>Check E-mail</h3>
-                        <p className={s.text}>We have sent instructions to your E-mail how to recover your password</p>
+                        <h3 className={cs.text}>Check E-mail</h3>
+                        <p className={cs.text}>We have sent instructions to your E-mail how to recover your password</p>
                     </div>
 
                 </div>
@@ -67,12 +64,12 @@ function RecoveryPassword() {
     }
     else {
         return (
-            <div className={s.background}>
-                <div className={s.blockContainer}>
-                    <h2 className={s.text}>It-incubator</h2>
-                    <h3 className={s.text}>Forgot your password?</h3>
-                    <FormControl className={s.formControl}>
-                        <form onSubmit={formik.handleSubmit} className={s.form}>
+            <div className={cs.background}>
+                <div className={cs.blockContainer}>
+                    <h2 className={cs.text}>It-incubator</h2>
+                    <h3 className={cs.text}>Forgot your password?</h3>
+                    <FormControl className={cs.formControl}>
+                        <form onSubmit={formik.handleSubmit} className={cs.form}>
                             <FormGroup>
                                 <TextField
                                     variant={"outlined"}
@@ -89,7 +86,7 @@ function RecoveryPassword() {
                                 <p>Enter your e-mail address and we will send you further instructions</p>
 
                                 <Button
-                                    className={s.button}
+                                    className={cs.button}
                                     type={'submit'}
                                     variant={'contained'}
                                     color={'primary'}
