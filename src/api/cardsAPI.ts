@@ -10,9 +10,9 @@ export const cardsAPI = {
         const payload = {
             email,
             from: `test-front-admin <romanxeo@gmail.com>`,
-            message: `<div style="background-color: lime; padding: 15px">
+            message: `<div style="background-color: #e3c486; padding: 10px">
                         password recovery link: 
-                        <a href='http://localhost:3000/#/set-new-password/$token$'>
+                        <a href='http://localhost:3000/#/EnterNewPassword/$token$'>
                         link</a></div>`
         }
         const promise = instance.post<any>('auth/forgot', payload);
