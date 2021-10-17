@@ -8,12 +8,14 @@ import EnterNewPassword from "./pages/EnterNewPassword/EnterNewPassword";
 import RecoveryPassword from "./pages/RecoveryPassword/RecoveryPassword";
 import SignUp from './pages/SignUp/SignUp';
 import TestPage from './pages/TestPage/TestPage';
+import LoadingLine from './common/LoadingLine/LoadingLine';
+import { ErrorSnackbar } from './common/ErrorSnackbar/ErrorSnackbar';
 
 
 function App() {
     return (
         <div className="App">
-
+            <LoadingLine/>
             <Switch>
                 <Route exact path={'/'} render={() => <TestPage/>}/>
                 <Route path={'/EnterNewPassword'} render={() => <EnterNewPassword/>}/>
@@ -24,7 +26,7 @@ function App() {
                 <Route path={'/SignUp'} render={() => <SignUp/>}/>
                 <Redirect from={'*'} to={'/error404'}/>
             </Switch>
-
+            <ErrorSnackbar/>
         </div>
     );
 }
