@@ -55,7 +55,8 @@ export const setNewPasswordTC = (password: string, resetPasswordToken: string) =
                 dispatch(completedRequestAC(true))
             })
             .catch(err => {
-                dispatch(setAppErrorAC('error'))
+                //console.log(err)
+                dispatch(setAppErrorAC('ERROR'))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })
