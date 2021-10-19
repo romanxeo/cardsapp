@@ -6,7 +6,10 @@ import TextField  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
+import {Redirect, useParams} from 'react-router-dom';
+import {setNewPasswordTC} from "../../store/setNewPasswordReducer";
+import {AppRootStateType} from "../../store/store";
 
 
 type FormikErrorType = {
@@ -14,8 +17,11 @@ type FormikErrorType = {
     confirmPassword?: string
 }
 
-function EnterNewPassword() {
+const SetNewPassword =() => {
 
+    let completed = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.completed)
+    let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.buttonDisabled)
+    const {token} = useParams<{token: string}>()
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -36,8 +42,16 @@ function EnterNewPassword() {
             }
             return errors;
         },
-        onSubmit: (values) => {}
+        onSubmit: (values) => {
+            dispatch(setNewPasswordTC(values.password, token))
+        }
     })
+
+    if (completed) {
+        return (
+            <Redirect to={'/login'}/>
+        )
+    }
 
     return (
         <div className={cs.background}>
@@ -81,6 +95,7 @@ function EnterNewPassword() {
                                 variant={'contained'}
                                 color={'primary'}
                                 size={'small'}
+                                disabled={buttonDisabled}
                             >
                                 Create new password
                             </Button>
@@ -93,4 +108,4 @@ function EnterNewPassword() {
     )
 }
 
-export default EnterNewPassword
+export default SetNewPassword

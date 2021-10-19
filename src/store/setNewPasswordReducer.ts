@@ -3,14 +3,14 @@ import {setAppErrorAC, setLoadingStatusAC} from "./appReducer";
 
 const buttonDisabledAC = (buttonDisabled: boolean) => {
     return {
-        type: "RECOVERY-PASSWORD/BUTTON-DISABLED",
+        type: "SET-NEW-PASSWORD/BUTTON-DISABLED",
         buttonDisabled
     } as const
 }
 
 const completedRequestAC = (completed: boolean) => {
     return {
-        type: "RECOVERY-PASSWORD/COMPLETED-REQUEST",
+        type: "SET-NEW-PASSWORD/COMPLETED-REQUEST",
         completed
     } as const
 }
@@ -18,7 +18,7 @@ const completedRequestAC = (completed: boolean) => {
 export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
 export type completedRequestAT = ReturnType<typeof completedRequestAC>
 
-export type actionRecoveryPasswordType =
+export type actionSetNewPasswordType =
     buttonDisabledAT | completedRequestAT
 
 export const initState = {
@@ -28,12 +28,12 @@ export const initState = {
 
 type InitStateType = typeof initState
 
-export const RecoveryPasswordReducer = (state: InitStateType = initState, action: actionRecoveryPasswordType): InitStateType => {
+export const setNewPasswordReducer = (state: InitStateType = initState, action: actionSetNewPasswordType): InitStateType => {
     switch (action.type) {
-        case "RECOVERY-PASSWORD/BUTTON-DISABLED": {
+        case "SET-NEW-PASSWORD/BUTTON-DISABLED": {
             return {...state, buttonDisabled: action.buttonDisabled}
         }
-        case "RECOVERY-PASSWORD/COMPLETED-REQUEST": {
+        case "SET-NEW-PASSWORD/COMPLETED-REQUEST": {
             return {...state, completed: action.completed}
         }
         default: {
@@ -43,20 +43,19 @@ export const RecoveryPasswordReducer = (state: InitStateType = initState, action
 }
 
 
-
 //thunk
-export const forgotPasswordTC = (email: string) => {
+export const setNewPasswordTC = (password: string, resetPasswordToken: string) => {
     return (dispatch: any) => {
         dispatch(buttonDisabledAC(true))
         dispatch(setLoadingStatusAC('loading'))
-        cardsAPI.forgotPassword(email)
+        cardsAPI.setNewPassword(password, resetPasswordToken)
             .then(res => {
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
                 dispatch(completedRequestAC(true))
             })
             .catch(err => {
-                dispatch(setAppErrorAC('E-mail not found'))
+                dispatch(setAppErrorAC('error'))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })
