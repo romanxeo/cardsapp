@@ -10,6 +10,10 @@ import { Provider } from 'react-redux';
 // commit connection
 
 
+//coment
+
+//3
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>
