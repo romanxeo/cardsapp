@@ -26,5 +26,14 @@ export const cardsAPI = {
         }
         const promise = instance.post<any>('auth/set-new-password', payload);
         return promise;
+    },
+
+    register(email: string, password: string) {
+        const payload = {
+            email,
+            password
+        }
+        const promise = instance.post<any>('auth/register', payload);
+        return promise;
     }
 }

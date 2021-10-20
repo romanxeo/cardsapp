@@ -3,14 +3,14 @@ import s from './RecoveryPassword.module.css';
 import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
 import iconEmail from '../../assets/icon/iconEmail.png'
-import TextField  from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
-import { forgotPasswordTC } from '../../store/recoveryPasswordReducer';
+import {forgotPasswordTC} from '../../store/recoveryPasswordReducer';
 
 
 type FormikErrorType = {
@@ -40,7 +40,6 @@ function RecoveryPassword() {
             dispatch(forgotPasswordTC(values.email))
 
 
-
             //setCompleted(true)
             formik.resetForm()
         },
@@ -61,8 +60,7 @@ function RecoveryPassword() {
                 </div>
             </div>
         )
-    }
-    else {
+    } else {
         return (
             <div className={cs.background}>
                 <div className={cs.blockContainer}>
@@ -80,32 +78,37 @@ function RecoveryPassword() {
                                 />
 
                                 <div style={{'height': '20px'}}>
-                                    {formik.touched.email && formik.errors.email && <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                                    {formik.touched.email && formik.errors.email &&
+                                    <div style={{color: 'red'}}>{formik.errors.email}</div>}
                                 </div>
 
                                 <p>Enter your e-mail address and we will send you further instructions</p>
 
-                                <Button
-                                    className={cs.button}
-                                    type={'submit'}
-                                    variant={'contained'}
-                                    color={'primary'}
-                                    size={'small'}
-                                    disabled={buttonDisabled}
-                                >
-                                    Send instructions
-                                </Button>
+                                <div className={cs.buttonBlock}>
+                                    <Button
+                                        className={cs.button}
+                                        type={'submit'}
+                                        variant={'contained'}
+                                        color={'primary'}
+                                        size={'small'}
+                                        disabled={buttonDisabled}
+                                    >
+                                        Send instructions
+                                    </Button>
+                                </div>
 
                                 <p>Did you remember your password?</p>
 
-                                <nav>
-                                    <NavLink
-                                        className={s.navlink}
-                                        to="/login"
-                                    >
-                                        Try logging in
-                                    </NavLink>
-                                </nav>
+                                <div className={cs.buttonBlock}>
+                                    <nav>
+                                        <NavLink
+                                            className={s.navlink}
+                                            to="/login"
+                                        >
+                                            Try logging in
+                                        </NavLink>
+                                    </nav>
+                                </div>
                             </FormGroup>
                         </form>
                     </FormControl>

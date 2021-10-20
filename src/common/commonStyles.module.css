@@ -38,6 +38,11 @@
 
 .button {
     width: 250px;
-    margin-left: 100px;
+}
 
+.buttonBlock {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }

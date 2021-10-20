@@ -2,11 +2,11 @@ import React from 'react';
 //import s from './RecoveryPassword.module.css';
 import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
-import TextField  from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
-import {useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useParams} from 'react-router-dom';
 import {setNewPasswordTC} from "../../store/setNewPasswordReducer";
 import {AppRootStateType} from "../../store/store";
@@ -17,11 +17,11 @@ type FormikErrorType = {
     confirmPassword?: string
 }
 
-const SetNewPassword =() => {
+const SetNewPassword = () => {
 
     let completed = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.completed)
     let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.buttonDisabled)
-    const {token} = useParams<{token: string}>()
+    const {token} = useParams<{ token: string }>()
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -71,7 +71,8 @@ const SetNewPassword =() => {
                             />
 
                             <div style={{'height': '20px'}}>
-                                {formik.touched.password && formik.errors.password && <div style={{color: 'red'}}>{formik.errors.password}</div>}
+                                {formik.touched.password && formik.errors.password &&
+                                <div style={{color: 'red'}}>{formik.errors.password}</div>}
                             </div>
 
                             <TextField
@@ -84,21 +85,24 @@ const SetNewPassword =() => {
                             />
 
                             <div style={{'height': '20px'}}>
-                                {formik.touched.confirmPassword && formik.errors.confirmPassword && <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div>}
+                                {formik.touched.confirmPassword && formik.errors.confirmPassword &&
+                                <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div>}
                             </div>
 
                             <p>Create new password and we will send you further instructions to E-mail</p>
 
-                            <Button
-                                className={cs.button}
-                                type={'submit'}
-                                variant={'contained'}
-                                color={'primary'}
-                                size={'small'}
-                                disabled={buttonDisabled}
-                            >
-                                Create new password
-                            </Button>
+                            <div className={cs.buttonBlock}>
+                                <Button
+                                    className={cs.button}
+                                    type={'submit'}
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    size={'small'}
+                                    disabled={buttonDisabled}
+                                >
+                                    Create new password
+                                </Button>
+                            </div>
 
                         </FormGroup>
                     </form>

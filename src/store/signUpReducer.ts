@@ -1,15 +1,29 @@
+import {cardsAPI} from "../api/cardsAPI";
+import {setAppErrorAC, setLoadingStatusAC} from "./appReducer";
 
-export const testAC = () => ({
-    type: "TEST",
-} as const)
+const buttonDisabledAC = (buttonDisabled: boolean) => {
+    return {
+        type: "SET-NEW-PASSWORD/BUTTON-DISABLED",
+        buttonDisabled
+    } as const
+}
 
-export type testAT = ReturnType<typeof testAC>
+const completedRequestAC = (completed: boolean) => {
+    return {
+        type: "SET-NEW-PASSWORD/COMPLETED-REQUEST",
+        completed
+    } as const
+}
 
-export type actionSignUpType =
-    testAT
+export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
+export type completedRequestAT = ReturnType<typeof completedRequestAC>
+
+export type actionSetNewPasswordType =
+    buttonDisabledAT | completedRequestAT
 
 export const initState = {
-
+    completed: false,
+    buttonDisabled: false
 }
 
 type InitStateType = typeof initState
