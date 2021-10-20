@@ -17,5 +17,22 @@ export const cardsAPI = {
         }
         const promise = instance.post<any>('auth/forgot', payload);
         return promise;
-    }
+    },
+    login(data: LoginParamsType) {
+        return instance.post<UserDataType>(`/auth/login`, data)
+    },
+}
+
+
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+
+export type UserDataType = {
+    _id: string
+    email: string
+    name: string
+    rememberMe?: boolean
 }

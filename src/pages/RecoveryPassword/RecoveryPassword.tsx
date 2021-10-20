@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import s from './RecoveryPassword.module.css';
 import {useFormik} from "formik";
 import iconEmail from '../../assets/icon/iconEmail.png'
-import TextField  from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
+import TextField  from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import FormGroup from "@mui/material/FormGroup";
 import { Dispatch } from 'redux'
 
 import { NavLink } from 'react-router-dom';
