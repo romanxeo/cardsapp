@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     LogIn: LogInReducer,
     Profile: ProfileReducer,
     RecoveryPassword: RecoveryPasswordReducer,
-    SignUpReducer: SignUpReducer
+    SignUp: SignUpReducer
 })
 
 // непосредственно создаём store

@@ -8,6 +8,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, Redirect, useParams} from 'react-router-dom';
+import {registerTC} from "../../store/signUpReducer";
+import {AppRootStateType} from "../../store/store";
 
 type FormikErrorType = {
     email?: string,
@@ -17,6 +19,8 @@ type FormikErrorType = {
 
 const SignUp = () => {
 
+    let completed = useSelector<AppRootStateType, boolean>(state => state.SignUp.completed)
+    let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.SignUp.buttonDisabled)
     const dispatch = useDispatch()
 
     const formik = useFormik({
@@ -46,9 +50,15 @@ const SignUp = () => {
             return errors;
         },
         onSubmit: (values) => {
-
+            dispatch(registerTC(values.email, values.password))
         }
     })
+
+    if (completed) {
+        return (
+            <Redirect to={'/login'}/>
+        )
+    }
 
     return (
         <div className={cs.background}>
@@ -106,7 +116,7 @@ const SignUp = () => {
                                     variant={'contained'}
                                     color={'primary'}
                                     size={'small'}
-                                    //disabled={buttonDisabled}
+                                    disabled={buttonDisabled}
                                 >
                                     Register
                                 </Button>
