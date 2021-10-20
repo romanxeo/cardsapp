@@ -6,17 +6,8 @@ import iconEmail from '../../assets/icon/iconEmail.png'
 import TextField  from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup";
-import { Dispatch } from 'redux'
-
 import { NavLink } from 'react-router-dom';
-import { cardsAPI } from '../../api/cardsAPI';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {forgotPasswordTC} from '../../store/recoveryPasswordReducer';
