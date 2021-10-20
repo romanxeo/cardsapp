@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect, useParams} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {registerTC} from "../../store/signUpReducer";
 import {AppRootStateType} from "../../store/store";
 
