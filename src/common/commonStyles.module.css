@@ -1,0 +1,48 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, #d299c2, #fef9d7);
+}
+
+.blockContainer {
+    width: 500px;
+    height: 500px;
+    background: aliceblue;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 4px;
+
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.form {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text {
+    text-align: center;
+}
+
+.formControl {
+    width: 500px
+}
+
+.button {
+    width: 250px;
+}
+
+.buttonBlock {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}

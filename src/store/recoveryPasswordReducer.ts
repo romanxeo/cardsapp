@@ -1,14 +1,14 @@
 import {cardsAPI} from "../api/cardsAPI";
 import {setAppErrorAC, setLoadingStatusAC} from "./appReducer";
 
-export const buttonDisabledAC = (buttonDisabled: boolean) => {
+const buttonDisabledAC = (buttonDisabled: boolean) => {
     return {
         type: "RECOVERY-PASSWORD/BUTTON-DISABLED",
         buttonDisabled
     } as const
 }
 
-export const completedRequestAC = (completed: boolean) => {
+const completedRequestAC = (completed: boolean) => {
     return {
         type: "RECOVERY-PASSWORD/COMPLETED-REQUEST",
         completed

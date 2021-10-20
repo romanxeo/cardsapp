@@ -4,7 +4,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import Error404 from './pages/Error404/Error404';
 import {LogIn} from './pages/LogIn/LogIn';
 import Profile from "./pages/Profile/Profile";
-import EnterNewPassword from "./pages/EnterNewPassword/EnterNewPassword";
+import SetNewPassword from "../src/pages/SetNewPassword/SetNewPassword";
 import RecoveryPassword from "./pages/RecoveryPassword/RecoveryPassword";
 import SignUp from './pages/SignUp/SignUp';
 import TestPage from './pages/TestPage/TestPage';
@@ -18,7 +18,7 @@ function App() {
             <LoadingLine/>
             <Switch>
                 <Route exact path={'/'} render={() => <TestPage/>}/>
-                <Route path={'/EnterNewPassword'} render={() => <EnterNewPassword/>}/>
+                <Route path={'/SetNewPassword/:token'} render={() => <SetNewPassword/>}/>
                 <Route path={'/Error404'} render={() => <Error404/>}/>
                 <Route path={'/login'} render={() => <LogIn/>}/>
                 <Route path={'/Profile'} render={() => <Profile/>}/>

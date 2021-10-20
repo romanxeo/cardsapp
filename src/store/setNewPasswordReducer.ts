@@ -3,14 +3,14 @@ import {setAppErrorAC, setLoadingStatusAC} from "./appReducer";
 
 const buttonDisabledAC = (buttonDisabled: boolean) => {
     return {
-        type: "SIGN-UP/BUTTON-DISABLED",
+        type: "SET-NEW-PASSWORD/BUTTON-DISABLED",
         buttonDisabled
     } as const
 }
 
 const completedRequestAC = (completed: boolean) => {
     return {
-        type: "SIGN-UP/COMPLETED-REQUEST",
+        type: "SET-NEW-PASSWORD/COMPLETED-REQUEST",
         completed
     } as const
 }
@@ -18,7 +18,7 @@ const completedRequestAC = (completed: boolean) => {
 export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
 export type completedRequestAT = ReturnType<typeof completedRequestAC>
 
-export type actionSignUpType =
+export type actionSetNewPasswordType =
     buttonDisabledAT | completedRequestAT
 
 export const initState = {
@@ -28,12 +28,12 @@ export const initState = {
 
 type InitStateType = typeof initState
 
-export const SignUpReducer = (state: InitStateType = initState, action: actionSignUpType): InitStateType => {
+export const setNewPasswordReducer = (state: InitStateType = initState, action: actionSetNewPasswordType): InitStateType => {
     switch (action.type) {
-        case "SIGN-UP/BUTTON-DISABLED": {
+        case "SET-NEW-PASSWORD/BUTTON-DISABLED": {
             return {...state, buttonDisabled: action.buttonDisabled}
         }
-        case "SIGN-UP/COMPLETED-REQUEST": {
+        case "SET-NEW-PASSWORD/COMPLETED-REQUEST": {
             return {...state, completed: action.completed}
         }
         default: {
@@ -42,19 +42,21 @@ export const SignUpReducer = (state: InitStateType = initState, action: actionSi
     }
 }
 
+
 //thunk
-export const registerTC = (email: string, password: string) => {
+export const setNewPasswordTC = (password: string, resetPasswordToken: string) => {
     return (dispatch: any) => {
         dispatch(buttonDisabledAC(true))
         dispatch(setLoadingStatusAC('loading'))
-        cardsAPI.register(email, password)
+        cardsAPI.setNewPassword(password, resetPasswordToken)
             .then(res => {
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
                 dispatch(completedRequestAC(true))
             })
             .catch(err => {
-                dispatch(setAppErrorAC('unknown error'))
+                //console.log(err)
+                dispatch(setAppErrorAC('ERROR'))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './SignUp.module.css';
+//import s from './RecoveryPassword.module.css';
 import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
 import TextField from '@material-ui/core/TextField';
@@ -7,37 +7,30 @@ import Button from '@material-ui/core/Button';
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink, Redirect} from 'react-router-dom';
-import {registerTC} from "../../store/signUpReducer";
+import {Redirect, useParams} from 'react-router-dom';
+import {setNewPasswordTC} from "../../store/setNewPasswordReducer";
 import {AppRootStateType} from "../../store/store";
 
+
 type FormikErrorType = {
-    email?: string,
-    password?: string,
+    password?: string
     confirmPassword?: string
 }
 
-const SignUp = () => {
+const SetNewPassword = () => {
 
-    let completed = useSelector<AppRootStateType, boolean>(state => state.SignUp.completed)
-    let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.SignUp.buttonDisabled)
+    let completed = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.completed)
+    let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.setNewPassword.buttonDisabled)
+    const {token} = useParams<{ token: string }>()
     const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
-            email: '',
             password: '',
             confirmPassword: ''
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
-
-            if (!values.email) {
-                errors.email = 'Required';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-
             if (!values.password) {
                 errors.password = 'ПУСТО';
             } else if (values.password.length < 4) {
@@ -50,7 +43,7 @@ const SignUp = () => {
             return errors;
         },
         onSubmit: (values) => {
-            dispatch(registerTC(values.email, values.password))
+            dispatch(setNewPasswordTC(values.password, token))
         }
     })
 
@@ -64,23 +57,10 @@ const SignUp = () => {
         <div className={cs.background}>
             <div className={cs.blockContainer}>
                 <h2 className={cs.text}>It-incubator</h2>
-                <h3 className={cs.text}>Sign Up</h3>
+                <h3 className={cs.text}>Create new password</h3>
                 <FormControl className={cs.formControl}>
                     <form onSubmit={formik.handleSubmit} className={cs.form}>
                         <FormGroup>
-                            <TextField
-                                variant={"outlined"}
-                                size={'small'}
-                                label='email'
-                                margin="normal"
-                                {...formik.getFieldProps('email')}
-                            />
-
-                            <div style={{'height': '20px'}}>
-                                {formik.touched.email && formik.errors.email &&
-                                <div style={{color: 'red'}}>{formik.errors.email}</div>}
-                            </div>
-
                             <TextField
                                 variant={"outlined"}
                                 size={'small'}
@@ -109,6 +89,8 @@ const SignUp = () => {
                                 <div style={{color: 'red'}}>{formik.errors.confirmPassword}</div>}
                             </div>
 
+                            <p>Create new password and we will send you further instructions to E-mail</p>
+
                             <div className={cs.buttonBlock}>
                                 <Button
                                     className={cs.button}
@@ -118,21 +100,8 @@ const SignUp = () => {
                                     size={'small'}
                                     disabled={buttonDisabled}
                                 >
-                                    Register
+                                    Create new password
                                 </Button>
-
-
-                            </div>
-
-                            <div className={cs.buttonBlock}>
-                                <nav>
-                                    <NavLink
-                                        className={s.navlink}
-                                        to="/login"
-                                    >
-                                        Login
-                                    </NavLink>
-                                </nav>
                             </div>
 
                         </FormGroup>
@@ -143,4 +112,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default SetNewPassword
