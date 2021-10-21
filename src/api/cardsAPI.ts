@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0',
+    baseURL: "http://localhost:7542/2.0/",
     withCredentials: true,
 })
 
@@ -39,6 +39,14 @@ export const cardsAPI = {
         }
         const promise = instance.post<any>('auth/register', payload);
         return promise;
+    },
+    me() {
+        return instance.post <UserDataType>(`auth/me`)
+        // return Promise.resolve({_id: "1",    email: "testEmail", name: "testName", rememberMe: true,
+        //     avatar: "https://pets2.me/media/res/1/3/1/9/2/13192.ozimro.300.jpg"})
+    },
+    logout() {
+        return instance.delete<any>('auth/me')
     }
 }
 
@@ -54,4 +62,5 @@ export type UserDataType = {
     email: string
     name: string
     rememberMe?: boolean
+    avatar?: string
 }

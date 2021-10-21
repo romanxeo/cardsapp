@@ -3,7 +3,7 @@ import thunkMiddleware from "redux-thunk";
 import {appReducer} from "./appReducer";
 import {setNewPasswordReducer} from "./setNewPasswordReducer";
 import {LogInReducer} from "./logInReducer";
-import {ProfileReducer} from "./profilereducer'";
+import {ProfileReducer} from "./profileReducer";
 import {RecoveryPasswordReducer} from "./recoveryPasswordReducer";
 import {SignUpReducer} from "./signUpReducer";
 

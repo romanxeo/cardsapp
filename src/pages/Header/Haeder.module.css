@@ -1,0 +1,27 @@
+.headerBlock {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    align-items: center;
+    background-color: aliceblue;
+}
+.nav {
+    min-width: 350px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.item a {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.item a.activeLink {
+    color: #333333;
+    font-weight: bold;
+}

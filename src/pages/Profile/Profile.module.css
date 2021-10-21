@@ -1,0 +1,42 @@
+.background {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, #d299c2, #fef9d7);
+}
+
+.blockContainer {
+    width: 800px;
+    height: 500px;
+    background: aliceblue;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 4px;
+
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.imgContainer {
+    padding: 20px;
+    width: 300px;
+}
+
+.text {
+    text-align: center;
+    width: 300px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button {
+    padding: 30px 0;
+    text-align: center;
+    width: 300px;
+
+}

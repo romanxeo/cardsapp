@@ -19,6 +19,8 @@ export const LogInReducer = (state: InitialStateType = initialState, action: Act
 export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
+
+
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
     dispatch(setLoadingStatusAC('loading'))
