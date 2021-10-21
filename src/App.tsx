@@ -11,6 +11,7 @@ import LoadingLine from './common/LoadingLine/LoadingLine';
 import {ErrorSnackbar} from './common/ErrorSnackbar/ErrorSnackbar';
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Header from "./pages/Header/Header";
+import TestPage from "./pages/TestPage/TestPage";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
 
             <LoadingLine/>
             <Switch>
-                <Route exact path={'/'} render={() => <LogIn/>}/>
+                <Route exact path={'/'} render={() => <TestPage/>}/>
                 <Route path={'/SetNewPassword/:token'} render={() => <SetNewPassword/>}/>
                 <Route path={'/Error404'} render={() => <Error404/>}/>
                 <Route path={'/login'} render={() => <LogIn/>}/>

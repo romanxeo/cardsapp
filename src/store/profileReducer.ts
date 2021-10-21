@@ -1,10 +1,11 @@
 import {Dispatch} from 'redux'
 import {cardsAPI} from "../api/cardsAPI";
+import {setAppErrorAC, setAppErrorAT, setLoadingStatusAC, setLoadingStatusAT} from "./appReducer";
 
 
 export type SetUserDataACType = ReturnType<typeof setUserDataAC>
 
-export type ActionProfileType = SetUserDataACType
+export type ActionProfileType = SetUserDataACType |  setLoadingStatusAT | setAppErrorAT
 type ThunkDispatch = Dispatch<ActionProfileType>
 
 export const initState = {
@@ -35,10 +36,15 @@ export const setUserDataAC = (name: string, avatar: string) => ({
 // thunks
 export const setUserDataTC = () => {
     return (dispatch: ThunkDispatch) => {
+        dispatch(setLoadingStatusAC('loading'))
         cardsAPI.me()
             .then((res) => {
-                console.log(res.data.name)
                 dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : ""))
+                dispatch(setLoadingStatusAC('idle'))
+            })
+            .catch(() => {
+                dispatch(setLoadingStatusAC('idle'))
+                // dispatch(setAppErrorAC('unknown error'))
             })
     }
 

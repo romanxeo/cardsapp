@@ -1,5 +1,7 @@
-import { setLoadingStatusAC, setAppErrorAC} from './appReducer'
-import { LoginParamsType, cardsAPI} from "../api/cardsAPI";
+import {setLoadingStatusAC, setAppErrorAC, setLoadingStatusAT} from './appReducer'
+import {LoginParamsType, cardsAPI} from "../api/cardsAPI";
+import {setUserDataAC, SetUserDataACType} from "./profileReducer";
+import {Dispatch} from 'redux';
 
 
 const initialState = {
@@ -20,7 +22,6 @@ export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 
-
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
     dispatch(setLoadingStatusAC('loading'))
@@ -28,6 +29,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
         .then((res) => {
             dispatch(setIsLoggedInAC(true))
             dispatch(setLoadingStatusAC('idle'))
+            dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : ""))
         })
         .catch((error) => {
             //dispatch(setAppErrorAC('dfdgfd'))
@@ -35,5 +37,21 @@ export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
         })
 }
 
+export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setLoadingStatusAC('loading'))
+    cardsAPI.logOut()
+        .then((res) => {
+            dispatch(setIsLoggedInAC(false))
+            dispatch(setLoadingStatusAC('idle'))
+            dispatch(setUserDataAC("",""))
+        })
+        .catch((error) => {
+            //dispatch(setAppErrorAC('dfdgfd'))
+            dispatch(setLoadingStatusAC('idle'))
+        })
+
+
+}
+
 // types
-type ActionsType = ReturnType<typeof setIsLoggedInAC>
+type ActionsType = ReturnType<typeof setIsLoggedInAC> | setLoadingStatusAT | SetUserDataACType

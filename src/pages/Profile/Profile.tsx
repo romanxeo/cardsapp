@@ -5,6 +5,7 @@ import {setUserDataTC} from "../../store/profileReducer";
 import {Redirect, useHistory} from "react-router-dom";
 import s from "./Profile.module.css"
 import Button from '@material-ui/core/Button';
+import {setIsLoggedInAC} from "../../store/logInReducer";
 
 function Profile() {
     const dispatch = useDispatch()
@@ -13,18 +14,17 @@ function Profile() {
     const avatar = useSelector<AppRootStateType, string>(state => state.Profile.avatar);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.LogIn.isLoggedIn);
     const history = useHistory();
-    // useEffect(() => {
-    //     dispatch(setUserDataTC());
-    //
-    // }, [])
+
     const onClickHandler = () => {
-        history.push('/EditProfile',);
+        history.push('/EditProfile');
     }
 
     if (!isLoggedIn) {
         dispatch(setUserDataTC());
         if (!name) {
-            return <Redirect to={"/Login"}/>
+            return <Redirect to={"/login"}/>
+        } else {
+            dispatch(setIsLoggedInAC(true))
         }
 
     }

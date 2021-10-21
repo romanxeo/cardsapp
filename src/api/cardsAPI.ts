@@ -45,7 +45,7 @@ export const cardsAPI = {
         // return Promise.resolve({_id: "1",    email: "testEmail", name: "testName", rememberMe: true,
         //     avatar: "https://pets2.me/media/res/1/3/1/9/2/13192.ozimro.300.jpg"})
     },
-    logout() {
+    logOut() {
         return instance.delete<any>('auth/me')
     }
 }
