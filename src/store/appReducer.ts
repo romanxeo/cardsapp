@@ -22,6 +22,7 @@ export type actionAppType = setLoadingStatusAT | setAppErrorAT
 export const initState = {
     status: 0,
     error: null as null | string
+
 }
 
 type InitStateType = typeof initState

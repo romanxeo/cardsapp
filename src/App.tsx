@@ -18,7 +18,6 @@ function App() {
     return (
         <div className="App">
             <Header/>
-
             <LoadingLine/>
             <Switch>
                 <Route exact path={'/'} render={() => <TestPage/>}/>

@@ -42,9 +42,11 @@ export const setUserDataTC = () => {
                 dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : ""))
                 dispatch(setLoadingStatusAC('idle'))
             })
-            .catch(() => {
+            .catch((e) => {
                 dispatch(setLoadingStatusAC('idle'))
-                // dispatch(setAppErrorAC('unknown error'))
+                const error = e.response ? e.response.data.error : "some unknown error"
+                dispatch(setAppErrorAC(error))
+
             })
     }
 

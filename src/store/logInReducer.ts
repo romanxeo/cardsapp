@@ -1,4 +1,4 @@
-import {setLoadingStatusAC, setAppErrorAC, setLoadingStatusAT} from './appReducer'
+import {setLoadingStatusAC, setAppErrorAC, setLoadingStatusAT, setAppErrorAT} from './appReducer'
 import {LoginParamsType, cardsAPI} from "../api/cardsAPI";
 import {setUserDataAC, SetUserDataACType} from "./profileReducer";
 import {Dispatch} from 'redux';
@@ -46,12 +46,12 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
             dispatch(setUserDataAC("",""))
         })
         .catch((error) => {
-            //dispatch(setAppErrorAC('dfdgfd'))
             dispatch(setLoadingStatusAC('idle'))
+            dispatch(setAppErrorAC("some error"))
         })
 
 
 }
 
 // types
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | setLoadingStatusAT | SetUserDataACType
+type ActionsType = ReturnType<typeof setIsLoggedInAC> | setLoadingStatusAT | SetUserDataACType | setAppErrorAT
