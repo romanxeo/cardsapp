@@ -34,6 +34,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
         .catch(e => {
             //dispatch(setAppErrorAC('dfdgfd'))
             const error = e.response ? e.response.data.error : "some unknown error"
+            dispatch(setAppErrorAC(error))
             dispatch(setLoadingStatusAC('idle'))
         })
 }
