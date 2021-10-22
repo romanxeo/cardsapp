@@ -13,7 +13,9 @@ export const cardsAPI = {
             message: `<div style="background-color: #e3c486; padding: 10px">
                         password recovery link: 
                         <a href='http://localhost:3000/#/SetNewPassword/$token$'>
-                        link</a></div>`
+                        link local</a>
+                        <a href='https://romanxeo.github.io/#/SetNewPassword/$token$'>
+                        link gh-pages</a></div>`
         }
         const promise = instance.post<any>('auth/forgot', payload);
         return promise;
