@@ -53,8 +53,10 @@ export const registerTC = (email: string, password: string) => {
                 dispatch(setLoadingStatusAC('idle'))
                 dispatch(completedRequestAC(true))
             })
-            .catch(err => {
-                dispatch(setAppErrorAC('unknown error'))
+            .catch(e => {
+                const error = e.response ? e.response.data.error : "some unknown error"
+                dispatch(setAppErrorAC(error))
+                //dispatch(setAppErrorAC('unknown error'))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })

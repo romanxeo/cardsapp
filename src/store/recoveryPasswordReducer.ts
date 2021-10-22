@@ -55,8 +55,9 @@ export const forgotPasswordTC = (email: string) => {
                 dispatch(setLoadingStatusAC('idle'))
                 dispatch(completedRequestAC(true))
             })
-            .catch(err => {
-                dispatch(setAppErrorAC('E-mail not found'))
+            .catch(e => {
+                const error = e.response ? e.response.data.error : "some unknown error"
+                dispatch(setAppErrorAC(error))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })

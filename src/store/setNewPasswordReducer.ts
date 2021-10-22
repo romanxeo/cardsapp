@@ -54,9 +54,10 @@ export const setNewPasswordTC = (password: string, resetPasswordToken: string) =
                 dispatch(setLoadingStatusAC('idle'))
                 dispatch(completedRequestAC(true))
             })
-            .catch(err => {
+            .catch(e => {
                 //console.log(err)
-                dispatch(setAppErrorAC('ERROR'))
+                const error = e.response ? e.response.data.error : "some unknown error"
+                dispatch(setAppErrorAC(error))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
             })

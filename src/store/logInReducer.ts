@@ -45,9 +45,11 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
             dispatch(setLoadingStatusAC('idle'))
             dispatch(setUserDataAC("",""))
         })
-        .catch((error) => {
+        .catch(e => {
             dispatch(setLoadingStatusAC('idle'))
-            dispatch(setAppErrorAC("some error"))
+            //dispatch(setAppErrorAC("some error"))
+            const error = e.response ? e.response.data.error : "some unknown error"
+            dispatch(setAppErrorAC(error))
         })
 
 
