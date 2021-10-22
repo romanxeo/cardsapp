@@ -10,7 +10,7 @@ export const cardsAPI = {
         const payload = {
             email,
             from: `test-front-admin <romanxeo@gmail.com>`,
-            message: `<div style="background-color: #e3c486; padding: 10px">
+            message: `<div style="background-color: #a3c486; padding: 10px">
                         password recovery link: 
                         <a href='http://localhost:3000/#/SetNewPassword/$token$'>
                         link local</a>

@@ -1,16 +1,19 @@
 import React from 'react'
-import Snackbar from '@mui/material/Snackbar'
-import Alert, {AlertProps} from '@mui/material/Alert';
-import {useDispatch, useSelector} from "react-redux";
+//import Snackbar from '@mui/material/Snackbar'
+//import Alert, {AlertProps} from '@mui/material/Alert';
+//import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {setAppErrorAC} from "../../store/appReducer";
-//
-// function Alert(props: AlertProps) {
-//     debugger
-//     return <MuiAlert elevation={6} variant="filled" {...props} />
-// }
 
-//
+
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert, {AlertProps} from '@material-ui/lab/Alert'
+import {useDispatch, useSelector} from "react-redux";
+
+
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 export function ErrorSnackbar() {
 
