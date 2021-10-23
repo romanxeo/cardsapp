@@ -1,5 +1,5 @@
 export type RequestStatusType = 'idle' | 'loading'
-
+//test2
 export const setLoadingStatusAC = (statusRequest: RequestStatusType) => {
     return {
         type: "APP/SET-STATUS",
