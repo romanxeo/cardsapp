@@ -29,11 +29,12 @@ export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
         .then((res) => {
             dispatch(setIsLoggedInAC(true))
             dispatch(setLoadingStatusAC('idle'))
-            dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : ""))
+            dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : "", res.data._id,
+                res.data.publicCardPacksCount))
         })
         .catch(e => {
             //dispatch(setAppErrorAC('dfdgfd'))
-            const error = e.response ? e.response.data.error : "some unknown error"
+            const error = e.response ? e.response.data.error : e.message
             dispatch(setAppErrorAC(error))
             dispatch(setLoadingStatusAC('idle'))
         })
@@ -45,12 +46,12 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
         .then((res) => {
             dispatch(setIsLoggedInAC(false))
             dispatch(setLoadingStatusAC('idle'))
-            dispatch(setUserDataAC("",""))
+            dispatch(setUserDataAC("", "", "", 0))
         })
         .catch(e => {
             dispatch(setLoadingStatusAC('idle'))
             //dispatch(setAppErrorAC("some error"))
-            const error = e.response ? e.response.data.error : "some unknown error"
+            const error = e.response ? e.response.data.error : e.message
             dispatch(setAppErrorAC(error))
         })
 

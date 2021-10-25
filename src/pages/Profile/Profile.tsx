@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 type ProfilePropsType = {
     name: string
     avatar?: string
+    publicCardPacksCount: number
     onClickHandler: () => void
 }
 
@@ -15,6 +16,7 @@ function Profile(props: ProfilePropsType) {
             <div className={s.blockContainer}>
                 <div className={s.imgContainer}><img src={props.avatar} alt={props.name}/></div>
                 <div className={s.text}>{props.name}</div>
+                <div className={s.text}>{`You have ${props.publicCardPacksCount} public packs`}</div>
                 <div className={s.button}>
                     <Button
                         variant={'contained'}

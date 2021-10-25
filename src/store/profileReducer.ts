@@ -5,12 +5,14 @@ import {setAppErrorAC, setAppErrorAT, setLoadingStatusAC, setLoadingStatusAT} fr
 
 export type SetUserDataACType = ReturnType<typeof setUserDataAC>
 
-export type ActionProfileType = SetUserDataACType |  setLoadingStatusAT | setAppErrorAT
+export type ActionProfileType = SetUserDataACType | setLoadingStatusAT | setAppErrorAT
 type ThunkDispatch = Dispatch<ActionProfileType>
 
 export const initState = {
     name: "",
     avatar: "",
+    _id: "",
+    publicCardPacksCount: 0,
 }
 
 type InitStateType = typeof initState
@@ -28,8 +30,8 @@ export const ProfileReducer = (state: InitStateType = initState, action: ActionP
     }
 }
 
-export const setUserDataAC = (name: string, avatar: string) => ({
-    type: setUserData, name, avatar
+export const setUserDataAC = (name: string, avatar: string, _id: string, publicCardPacksCount: number) => ({
+    type: setUserData, name, avatar, _id, publicCardPacksCount
 } as const)
 
 
@@ -39,12 +41,13 @@ export const setUserDataTC = () => {
         dispatch(setLoadingStatusAC('loading'))
         cardsAPI.me()
             .then((res) => {
-                dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : ""))
+                dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : "", res.data._id,
+                    res.data.publicCardPacksCount))
                 dispatch(setLoadingStatusAC('idle'))
             })
             .catch((e) => {
                 dispatch(setLoadingStatusAC('idle'))
-                const error = e.response ? e.response.data.error : "some unknown error"
+                const error = e.response ? e.response.data.error : e.message
                 dispatch(setAppErrorAC(error))
 
             })
