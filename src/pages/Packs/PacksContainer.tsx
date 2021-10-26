@@ -3,7 +3,7 @@ import Packs from "./Packs";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {PackType} from "../../api/cardsAPI";
-import {fetchPacksTC} from "../../store/packsReducer";
+import {AddPackTC, fetchPacksTC} from "../../store/packsReducer";
 import {Redirect} from "react-router-dom";
 
 
@@ -19,7 +19,7 @@ function PacksContainer() {
         return <Redirect to={"/login"}/>
     }
     const addPacks = () => {
-
+        dispatch(AddPackTC("NewName", false))
     }
 
     return (

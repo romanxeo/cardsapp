@@ -1,13 +1,17 @@
 import {packsAPI, PackType} from "../api/cardsAPI";
-import {Dispatch} from "redux";
 import {setAppErrorAC, setAppErrorAT, setLoadingStatusAC, setLoadingStatusAT} from "./appReducer";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {AppRootStateType} from "./store";
 
 type InitStateType = typeof initState;
 type getPacksACType = ReturnType<typeof getPacksAC>
-export type ActionsPacksType = setLoadingStatusAT | setAppErrorAT | getPacksACType
-type ThunkDispatch = Dispatch<ActionsPacksType>
+type addPacksACType = ReturnType<typeof addPacksAC>
+export type ActionsPacksType = setLoadingStatusAT | setAppErrorAT | getPacksACType | addPacksACType
+type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsPacksType>
+
 
 const setPacks = "packs/SET-PACKS"
+const addPack = "packs/ADD-PACK"
 
 export const initState: Array<PackType> = []
 
@@ -25,14 +29,34 @@ export const packsReducer = (state: InitStateType = initState, action: ActionsPa
 export const getPacksAC = (packs: Array<PackType>) => ({
     type: setPacks, packs
 } as const)
+export const addPacksAC = () => ({
+    type: addPack
+} as const)
 
 //thunk
-export const fetchPacksTC = () => {
-    return (dispatch: ThunkDispatch) => {
+export const fetchPacksTC = (): ThunkType => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
         dispatch(setLoadingStatusAC('loading'))
         packsAPI.getPacks()
             .then((res) => {
                 dispatch(getPacksAC(res.data.cardPacks))
+                dispatch(setLoadingStatusAC('idle'))
+            })
+            .catch((e) => {
+                dispatch(setLoadingStatusAC('idle'))
+                const error = e.response ? e.response.data.error : e.message
+                dispatch(setAppErrorAC(error))
+            })
+    }
+}
+
+export const AddPackTC = (name: string, isPrivate: boolean): ThunkType => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
+        dispatch(setLoadingStatusAC('loading'));
+        packsAPI.addPack(name, isPrivate)
+            .then((res) => {
+                // dispatch(addPacksAC())
+                dispatch(fetchPacksTC())
                 dispatch(setLoadingStatusAC('idle'))
             })
             .catch((e) => {

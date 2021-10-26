@@ -22,11 +22,10 @@ function Packs(props: PropsType) {
                 Add pack
             </Button>
             {props.packs.map((p, key) => {
-                // debugger
                 return <div key={p._id}>
-                    <div>{p.name}</div>
-                    <div>{p.cardsCount}</div>
-                    <div>{p.updated}</div>
+                    <span>{p.name}</span>
+                    <span>{p.cardsCount}</span>
+                    <span>{p.updated}</span>
                 </div>
 
 

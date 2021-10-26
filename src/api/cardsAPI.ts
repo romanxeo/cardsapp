@@ -55,9 +55,14 @@ export const packsAPI = {
     getPacks() {
         return instance.get<PacksResponseType>('cards/pack')
     },
-    // addPack() {
-    //     return instance.post
-    // }
+    addPack(name: string, isPrivate: boolean) {
+        const payload = {
+            cardsPack: {
+                name, isPrivate
+            }
+        }
+        return instance.post<PackType>('cards/pack', payload)
+    }
 }
 
 
