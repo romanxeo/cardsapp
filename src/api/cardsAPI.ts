@@ -51,6 +51,15 @@ export const cardsAPI = {
     }
 }
 
+export const packsAPI = {
+    getPacks() {
+        return instance.get<PacksResponseType>('cards/pack')
+    },
+    // addPack() {
+    //     return instance.post
+    // }
+}
+
 
 export type LoginParamsType = {
     email: string
@@ -65,5 +74,24 @@ export type UserDataType = {
     rememberMe?: boolean
     avatar?: string
     publicCardPacksCount: number
+}
+export type PackType = {
+    _id: string
+    name: string
+    user_id: string
+    user_name: string
+    private: boolean
+    created: string
+    updated: string
+    cardsCount: number
+}
+export type PacksResponseType = {
+    cardPacks: Array<PackType>
+    cardPacksTotalCount: number // количество колод
+    maxCardsCount: number
+    minCardsCount:number
+    page: number// выбранная страница
+    pageCount: number // количество элементов на странице
+
 
 }

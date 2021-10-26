@@ -12,6 +12,7 @@ import EditProfile from "./pages/EditProfile/EditProfile";
 import Header from "./pages/Header/Header";
 import ProfileContainer from "./pages/Profile/ProfileContainer";
 import StartPage from "./pages/StartPage/StartPage";
+import PacksContainer from "./pages/Packs/PacksContainer";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 <Route path={'/RecoveryPassword'} render={() => <RecoveryPassword/>}/>
                 <Route path={'/SignUp'} render={() => <SignUp/>}/>
                 <Route path={'/EditProfile'} render={() => <EditProfile/>}/>
+                <Route path={'/Packs'} render={() => <PacksContainer/>}/>
                 <Redirect from={'*'} to={'/error404'}/>
             </Switch>
             <ErrorSnackbar/>

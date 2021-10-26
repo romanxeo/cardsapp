@@ -49,7 +49,6 @@ export const setUserDataTC = () => {
                 dispatch(setLoadingStatusAC('idle'))
                 const error = e.response ? e.response.data.error : e.message
                 dispatch(setAppErrorAC(error))
-
             })
     }
 
