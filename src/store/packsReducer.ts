@@ -10,14 +10,14 @@ export type ActionsPacksType = setLoadingStatusAT | setAppErrorAT | getPacksACTy
 type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsPacksType>
 
 
-const setPacks = "packs/SET-PACKS"
+const getPacks = "packs/GET-PACKS"
 // const addPack = "packs/ADD-PACK"
 
 export const initState: Array<PackType> = []
 
 export const packsReducer = (state: InitStateType = initState, action: ActionsPacksType): InitStateType => {
     switch (action.type) {
-        case "packs/SET-PACKS": {
+        case getPacks: {
             return action.packs;
         }
         default: {
@@ -27,7 +27,7 @@ export const packsReducer = (state: InitStateType = initState, action: ActionsPa
 }
 
 export const getPacksAC = (packs: Array<PackType>) => ({
-    type: setPacks, packs
+    type: getPacks, packs
 } as const)
 // export const addPacksAC = () => ({
 //     type: addPack
