@@ -3,7 +3,7 @@ import Packs from "./Packs";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {PackType} from "../../api/cardsAPI";
-import {AddPackTC, fetchPacksTC} from "../../store/packsReducer";
+import {addPackTC, deletePackTC, fetchPacksTC} from "../../store/packsReducer";
 import {Redirect} from "react-router-dom";
 
 
@@ -18,13 +18,20 @@ function PacksContainer() {
     if (!isLoggedIn) {
         return <Redirect to={"/login"}/>
     }
-    const addPacks = () => {
-        dispatch(AddPackTC("NewName", false))
+    const addPackHandler = () => {
+        dispatch(addPackTC("NewName", false))
+    }
+    const deletePackHandler = (_id: string) => {
+        dispatch(deletePackTC(_id))
     }
 
     return (
 
-        <Packs packs = {packs} onClickHandler = {addPacks}/>
+        <Packs packs = {packs}
+               addPackHandler = {addPackHandler}
+               deletePackHandler = {deletePackHandler}
+
+        />
     )
 }
 

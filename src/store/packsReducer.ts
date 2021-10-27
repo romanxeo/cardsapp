@@ -5,13 +5,13 @@ import {AppRootStateType} from "./store";
 
 type InitStateType = typeof initState;
 type getPacksACType = ReturnType<typeof getPacksAC>
-type addPacksACType = ReturnType<typeof addPacksAC>
-export type ActionsPacksType = setLoadingStatusAT | setAppErrorAT | getPacksACType | addPacksACType
+// type addPacksACType = ReturnType<typeof addPacksAC>
+export type ActionsPacksType = setLoadingStatusAT | setAppErrorAT | getPacksACType
 type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsPacksType>
 
 
 const setPacks = "packs/SET-PACKS"
-const addPack = "packs/ADD-PACK"
+// const addPack = "packs/ADD-PACK"
 
 export const initState: Array<PackType> = []
 
@@ -29,9 +29,9 @@ export const packsReducer = (state: InitStateType = initState, action: ActionsPa
 export const getPacksAC = (packs: Array<PackType>) => ({
     type: setPacks, packs
 } as const)
-export const addPacksAC = () => ({
-    type: addPack
-} as const)
+// export const addPacksAC = () => ({
+//     type: addPack
+// } as const)
 
 //thunk
 export const fetchPacksTC = (): ThunkType => {
@@ -50,7 +50,7 @@ export const fetchPacksTC = (): ThunkType => {
     }
 }
 
-export const AddPackTC = (name: string, isPrivate: boolean): ThunkType => {
+export const addPackTC = (name: string, isPrivate: boolean): ThunkType => {
     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
         dispatch(setLoadingStatusAC('loading'));
         packsAPI.addPack(name, isPrivate)
@@ -66,6 +66,38 @@ export const AddPackTC = (name: string, isPrivate: boolean): ThunkType => {
             })
     }
 }
+
+export const deletePackTC = (_id: string): ThunkType => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
+        dispatch(setLoadingStatusAC('loading'));
+        packsAPI.deletePack(_id)
+            .then(() => {
+                dispatch(fetchPacksTC())
+                dispatch(setLoadingStatusAC('idle'))
+            })
+            .catch((e) => {
+                dispatch(setLoadingStatusAC('idle'))
+                const error = e.response ? e.response.data.error : e.message
+                dispatch(setAppErrorAC(error))
+            })
+    }
+}
+
+// export const updatePackTC = (_id: string): ThunkType => {
+//     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
+//         dispatch(setLoadingStatusAC('loading'));
+//         packsAPI.updatePack(_id)
+//             .then(() => {
+//                 dispatch(fetchPacksTC())
+//                 dispatch(setLoadingStatusAC('idle'))
+//             })
+//             .catch((e) => {
+//                 dispatch(setLoadingStatusAC('idle'))
+//                 const error = e.response ? e.response.data.error : e.message
+//                 dispatch(setAppErrorAC(error))
+//             })
+//     }
+// }
 
 
 

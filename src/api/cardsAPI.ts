@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://neko-back.herokuapp.com/2.0",
-    // baseURL: "http://localhost:7542/2.0/",
+    // baseURL: "https://neko-back.herokuapp.com/2.0",
+    baseURL: "http://localhost:7542/2.0/",
     withCredentials: true,
 })
 
@@ -62,7 +62,14 @@ export const packsAPI = {
             }
         }
         return instance.post<PackType>('cards/pack', payload)
+    },
+    deletePack(_id: string) {
+        return instance.delete<PackType>(`cards/pack?id=${_id}`)
+    },
+    updatePack(_id: string) {
+        return instance.put<PackType>(`cards/pack?id=${_id}`)
     }
+
 }
 
 
