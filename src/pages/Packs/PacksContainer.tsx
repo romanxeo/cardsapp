@@ -3,7 +3,7 @@ import Packs from "./Packs";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {PackType} from "../../api/cardsAPI";
-import {addPackTC, deletePackTC, fetchPacksTC} from "../../store/packsReducer";
+import {addPackTC, deletePackTC, fetchPacksTC, updatePackTC} from "../../store/packsReducer";
 import {Redirect} from "react-router-dom";
 
 
@@ -24,12 +24,16 @@ function PacksContainer() {
     const deletePackHandler = (_id: string) => {
         dispatch(deletePackTC(_id))
     }
+    const updatePackHandler = (_id: string, name: string) => {
+        dispatch(updatePackTC(_id, name))
+    }
 
     return (
 
         <Packs packs = {packs}
                addPackHandler = {addPackHandler}
                deletePackHandler = {deletePackHandler}
+               updatePackHandler = {updatePackHandler}
 
         />
     )

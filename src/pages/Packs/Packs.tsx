@@ -8,6 +8,7 @@ type PropsType = {
     packs: PackType[]
     addPackHandler: () => void
     deletePackHandler: (_id: string) => void
+    updatePackHandler: (_id: string, name: string) => void
 }
 
 
@@ -39,7 +40,7 @@ function Packs(props: PropsType) {
                         variant={'contained'}
                         color={"primary"}
                         size={"small"}
-                        onClick={() => {}}
+                        onClick={() => props.updatePackHandler(p._id, "Updated name")}
                     >
                         Update
                     </Button>

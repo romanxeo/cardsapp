@@ -83,21 +83,21 @@ export const deletePackTC = (_id: string): ThunkType => {
     }
 }
 
-// export const updatePackTC = (_id: string): ThunkType => {
-//     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
-//         dispatch(setLoadingStatusAC('loading'));
-//         packsAPI.updatePack(_id)
-//             .then(() => {
-//                 dispatch(fetchPacksTC())
-//                 dispatch(setLoadingStatusAC('idle'))
-//             })
-//             .catch((e) => {
-//                 dispatch(setLoadingStatusAC('idle'))
-//                 const error = e.response ? e.response.data.error : e.message
-//                 dispatch(setAppErrorAC(error))
-//             })
-//     }
-// }
+export const updatePackTC = (_id: string, name: string): ThunkType => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
+        dispatch(setLoadingStatusAC('loading'));
+        packsAPI.updatePack(_id, name)
+            .then(() => {
+                dispatch(fetchPacksTC())
+                dispatch(setLoadingStatusAC('idle'))
+            })
+            .catch((e) => {
+                dispatch(setLoadingStatusAC('idle'))
+                const error = e.response ? e.response.data.error : e.message
+                dispatch(setAppErrorAC(error))
+            })
+    }
+}
 
 
 
