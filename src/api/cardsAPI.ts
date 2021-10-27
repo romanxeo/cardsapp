@@ -74,8 +74,8 @@ export const packsAPI = {
         }
         return instance.put<PackType>(`cards/pack`, payload)
     }
-
 }
+
 
 
 export type LoginParamsType = {

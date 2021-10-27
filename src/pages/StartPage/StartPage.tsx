@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './StartPage.module.css'
+import Table from "../../common/Table/Table";
 
 function StartPage() {
 
