@@ -63,7 +63,7 @@ const SignUp = () => {
     return (
         <div className={cs.background}>
             <div className={cs.blockContainer}>
-                <h2 className={cs.text}>It-incubator</h2>
+                <h2 className={cs.text}>IT Incubator</h2>
                 <h3 className={cs.text}>Sign Up</h3>
                 <FormControl className={cs.formControl}>
                     <form onSubmit={formik.handleSubmit} className={cs.form}>

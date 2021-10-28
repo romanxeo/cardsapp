@@ -3,27 +3,49 @@ import {LoginParamsType, cardsAPI} from "../api/cardsAPI";
 import {setUserDataAC, SetUserDataACType} from "./profileReducer";
 import {Dispatch} from 'redux';
 
+// actions
+export const setIsLoggedInAC = (value: boolean) =>
+    ({type: 'LOGIN/SET-IS-LOGGED-IN', value} as const)
+
+const buttonDisabledAC = (buttonDisabled: boolean) => {
+    return {
+        type: "LOGIN/BUTTON-DISABLED",
+        buttonDisabled
+    } as const
+}
+
+export type setIsLoggedInAT = ReturnType<typeof setIsLoggedInAC>
+export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
+
+// types
+type actionLogInType = setIsLoggedInAT
+    | buttonDisabledAT
+    | setLoadingStatusAT
+    | SetUserDataACType
+    | setAppErrorAT
 
 const initialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    buttonDisabled: false
 }
+
 type InitialStateType = typeof initialState
 
-export const LogInReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const LogInReducer = (state: InitialStateType = initialState, action: actionLogInType): InitialStateType => {
     switch (action.type) {
-        case 'login/SET-IS-LOGGED-IN':
+        case 'LOGIN/SET-IS-LOGGED-IN':
             return {...state, isLoggedIn: action.value}
+        case "LOGIN/BUTTON-DISABLED": {
+            return {...state, buttonDisabled: action.buttonDisabled}
+        }
         default:
             return state
     }
 }
-// actions
-export const setIsLoggedInAC = (value: boolean) =>
-    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 
 // thunks
-export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
+/*export const loginTwTC = (data: LoginParamsType) => (dispatch: any) => {
     dispatch(setLoadingStatusAC('loading'))
     cardsAPI.login(data)
         .then((res) => {
@@ -38,9 +60,33 @@ export const loginTC = (data: LoginParamsType) => (dispatch: any) => {
             dispatch(setAppErrorAC(error))
             dispatch(setLoadingStatusAC('idle'))
         })
+}*/
+
+//thunk
+export const loginTC = (data: LoginParamsType) => {
+    return (dispatch: any) => {
+        dispatch(buttonDisabledAC(true))
+        dispatch(setLoadingStatusAC('loading'))
+        cardsAPI.login(data)
+            .then(res => {
+                //alert('good')
+                dispatch(setIsLoggedInAC(true))
+                dispatch(buttonDisabledAC(false))
+                dispatch(setLoadingStatusAC('idle'))
+                dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : "", res.data._id,
+                    res.data.publicCardPacksCount))
+            })
+            .catch(e => {
+                //alert('bad')
+                const error = e.response ? e.response.data.error : "some unknown error"
+                dispatch(setAppErrorAC(error))
+                dispatch(buttonDisabledAC(false))
+                dispatch(setLoadingStatusAC('idle'))
+            })
+    }
 }
 
-export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+export const logoutTC = () => (dispatch: Dispatch<actionLogInType>) => {
     dispatch(setLoadingStatusAC('loading'))
     cardsAPI.logOut()
         .then((res) => {
@@ -55,8 +101,5 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
             dispatch(setAppErrorAC(error))
         })
 
-
 }
 
-// types
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | setLoadingStatusAT | SetUserDataACType | setAppErrorAT

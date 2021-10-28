@@ -1,9 +1,10 @@
 .headerBlock {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 20px;
+    /*//padding: 10px 20px;*/
     align-items: center;
     background-color: aliceblue;
+    height: 6vh;
 }
 .nav {
     min-width: 350px;
@@ -14,6 +15,7 @@
 }
 
 .item a {
+
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -26,3 +28,9 @@
     color: #333333;
     font-weight: bold;
 }
+
+.isLoginFix a {
+    margin-top: 6px;
+}
+
+

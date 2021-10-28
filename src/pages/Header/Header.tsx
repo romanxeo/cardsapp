@@ -34,13 +34,15 @@ function Header() {
                     {!isLoggedIn && <div className={s.item}>
                         <NavLink to={'/RecoveryPassword'} activeClassName={s.activeLink}>Recovery password</NavLink>
                     </div>}
-                    {isLoggedIn && <div className={s.item}>
+                    {isLoggedIn && <div className={s.item + ' ' + s.isLoginFix}>
                         <NavLink to={'/Profile'} activeClassName={s.activeLink}>Profile</NavLink>
                     </div>}
-                    {isLoggedIn && <div className={s.item}>
+                    {isLoggedIn && <div className={s.item + ' ' + s.isLoginFix}>
                         <NavLink to={'/Packs'} activeClassName={s.activeLink}>Packs</NavLink>
                     </div>}
                     {isLoggedIn && <div className={s.item}>
+                        {/*<button onClick={onClickHandler}>Log out</button>*/}
+                        {/*<NavLink to={'/Packs'} activeClassName={s.activeLink}>Packs</NavLink>*/}
                         <Button variant={'contained'}
                                 color={"primary"}
                                 size={"small"}
