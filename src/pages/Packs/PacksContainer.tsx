@@ -27,10 +27,16 @@ function PacksContainer() {
     const updatePackHandler = (_id: string, name: string) => {
         dispatch(updatePackTC(_id, name))
     }
+    const packsForTable = packs.map((p) => ({
+        firstCell: p.name,
+        secondCell: p.cardsCount,
+        thirdCell: p.updated,
+        cardsPack_id: p._id
+    }))
 
     return (
 
-        <Packs packs = {packs}
+        <Packs packsForTable = {packsForTable}
                addPackHandler = {addPackHandler}
                deletePackHandler = {deletePackHandler}
                updatePackHandler = {updatePackHandler}

@@ -6,7 +6,7 @@ import Table from "../../common/Table/Table";
 
 
 type PropsType = {
-    packs: PackType[]
+    packsForTable: Array<any>
     addPackHandler: () => void
     deletePackHandler: (_id: string) => void
     updatePackHandler: (_id: string, name: string) => void
@@ -25,9 +25,9 @@ function Packs(props: PropsType) {
                 Add pack
             </Button>
             <Table tableHeaders={["Name", "Cards count", "Updated", "Delete pack", "Update pack", "Cards"]}
-                   tableDate={props.packs}
-                   deletePackHandler={props.deletePackHandler}
-                   updatePackHandler={props.updatePackHandler}
+                   tableDate={props.packsForTable}
+                   deleteHandler={props.deletePackHandler}
+                   updateHandler={props.updatePackHandler}
             />
             
             {/*{props.packs.map((p, key) => {*/}

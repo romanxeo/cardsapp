@@ -1,13 +1,13 @@
 import React from 'react';
-import {PackType} from "../../api/cardsAPI";
 import s from './Table.module.css'
 import Button from "@material-ui/core/Button";
+import {NavLink} from 'react-router-dom';
 
 type PropsType = {
     tableHeaders: Array<string>
-    tableDate: Array<PackType>
-    deletePackHandler: (_id: string) => void
-    updatePackHandler: (_id: string, name: string) => void
+    tableDate: Array<any>
+    deleteHandler: (_id: string) => void
+    updateHandler: (_id: string, name: string) => void
 }
 
 function Table(props: PropsType) {
@@ -24,29 +24,33 @@ function Table(props: PropsType) {
 
             {props.tableDate.map((d) => {
                 return <tr className={s.table}>
-                    <td className={s.table}>{d.name}</td>
-                    <td className={s.table}>{d.cardsCount}</td>
-                    <td className={s.table}>{d.updated}</td>
+                    <td className={s.table}>{d.firstCell}</td>
+                    <td className={s.table}>{d.secondCell}</td>
+                    <td className={s.table}>{d.thirdCell}</td>
+                    <td className={s.table}>
+                        {d.forthCell ? d.forthCell : <NavLink to={`/Cards/${d.cardsPack_id}`}>Cards</NavLink>}
+                    </td>
                     <td className={s.table}>
                         <Button
                             variant={'outlined'}
                             color={"primary"}
                             size={"small"}
-                            onClick={() => props.deletePackHandler(d._id)}
+                            onClick={() => props.deleteHandler(d.cardsPack_id)}
                         >
                             Delete
                         </Button>
-                        </td>
-                        <td className={s.table}>
+                    </td>
+                    <td className={s.table}>
                         <Button
-                        variant={'outlined'}
-                        color={"primary"}
-                        size={"small"}
-                        onClick={() => props.updatePackHandler(d._id, "Updated name")}
+                            variant={'outlined'}
+                            color={"primary"}
+                            size={"small"}
+                            onClick={() => props.updateHandler(d.cardsPack_id, "Updated name")}
                         >
-                        Update
+                            Update
                         </Button>
                     </td>
+
                 </tr>
 
             })}

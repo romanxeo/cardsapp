@@ -13,6 +13,7 @@ import Header from "./pages/Header/Header";
 import ProfileContainer from "./pages/Profile/ProfileContainer";
 import StartPage from "./pages/StartPage/StartPage";
 import PacksContainer from "./pages/Packs/PacksContainer";
+import CardsContainer from "./pages/Cards/CardsContainer";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path={'/SignUp'} render={() => <SignUp/>}/>
                 <Route path={'/EditProfile'} render={() => <EditProfile/>}/>
                 <Route path={'/Packs'} render={() => <PacksContainer/>}/>
+                <Route path={'/Cards/:cardsPack_id'} render={() => <CardsContainer/>}/>
                 <Redirect from={'*'} to={'/error404'}/>
             </Switch>
             <ErrorSnackbar/>
