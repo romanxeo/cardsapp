@@ -69,7 +69,6 @@ export const loginTC = (data: LoginParamsType) => {
         dispatch(setLoadingStatusAC('loading'))
         cardsAPI.login(data)
             .then(res => {
-                //alert('good')
                 dispatch(setIsLoggedInAC(true))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
@@ -77,7 +76,6 @@ export const loginTC = (data: LoginParamsType) => {
                     res.data.publicCardPacksCount))
             })
             .catch(e => {
-                //alert('bad')
                 const error = e.response ? e.response.data.error : "some unknown error"
                 dispatch(setAppErrorAC(error))
                 dispatch(buttonDisabledAC(false))
