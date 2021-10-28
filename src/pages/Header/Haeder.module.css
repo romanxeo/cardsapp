@@ -1,9 +1,10 @@
 .headerBlock {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 20px;
+    /*//padding: 10px 20px;*/
     align-items: center;
     background-color: aliceblue;
+    height: 6vh;
 }
 .nav {
     min-width: 350px;

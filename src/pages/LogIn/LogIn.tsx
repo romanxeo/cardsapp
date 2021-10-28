@@ -11,7 +11,9 @@ import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../store/logInReducer";
 import {AppRootStateType} from "../../store/store";
-import { Redirect } from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
+import cs from "../../common/commonStyles.module.css";
+import s from "../RecoveryPassword/RecoveryPassword.module.css";
 
 type FormikErrorType = {
     email?: string
@@ -21,8 +23,10 @@ type FormikErrorType = {
 
 export const LogIn = () => {
 
-    const dispatch = useDispatch();
+    let buttonDisabled = useSelector<AppRootStateType, boolean>(state => state.LogIn.buttonDisabled)
+    const isLoggedIn = useSelector<AppRootStateType, boolean> (state => state.LogIn.isLoggedIn)
 
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -50,13 +54,13 @@ export const LogIn = () => {
         },
     });
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean> (state => state.LogIn.isLoggedIn)
 
     if (isLoggedIn) {
         return (
             <Redirect to={'/profile'}/>
         )
     }
+/*
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
@@ -102,6 +106,70 @@ export const LogIn = () => {
             </FormControl>
         </Grid>
     </Grid>
+*/
+
+    return (
+        <div className={cs.background}>
+            <div className={cs.blockContainer}>
+                <h2 className={cs.text}>IT Incubator</h2>
+                <h3 className={cs.text}>Log In</h3>
+                <FormControl className={cs.formControl}>
+                    <form onSubmit={formik.handleSubmit} className={cs.form}>
+                        <FormGroup>
+                            <TextField
+                                variant={"outlined"}
+                                size={'small'}
+                                label='E-mail'
+                                margin="normal"
+                                {...formik.getFieldProps('email')}
+                            />
+
+                            <div style={{'height': '20px'}}>
+                                {formik.touched.email && formik.errors.email &&
+                                <div style={{color: 'red'}}>{formik.errors.email}</div>}
+                            </div>
+
+
+                            <TextField
+                                variant={"outlined"}
+                                type="password"
+                                size={'small'}
+                                label='Password'
+                                margin="normal"
+                                {...formik.getFieldProps('password')}
+                            />
+
+                            <div style={{'height': '20px'}}>
+                                {formik.touched.password && formik.errors.password &&
+                                <div style={{color: 'red'}}>{formik.errors.password}</div>}
+                            </div>
+
+                            <FormControlLabel
+                                label={'Remember me'}
+                                control={<Checkbox/>}
+                                {...formik.getFieldProps('rememberMe')}
+                                checked={formik.values.rememberMe}
+                            />
+
+                            <div className={cs.buttonBlock}>
+                                <Button
+                                    className={cs.button}
+                                    type={'submit'}
+                                    variant={'contained'}
+                                    color={'primary'}
+                                    size={'small'}
+                                    disabled={buttonDisabled}
+                                >
+                                    Login
+                                </Button>
+                            </div>
+
+                        </FormGroup>
+                    </form>
+                </FormControl>
+            </div>
+        </div>
+    )
 }
 
 
