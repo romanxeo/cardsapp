@@ -6,23 +6,23 @@ import {NavLink} from 'react-router-dom';
 type PropsType = {
     tableHeaders: Array<string>
     tableDate: Array<any>
-    deleteHandler: (_id: string) => void
+    deleteHandler: (cardsPack_id: string) => void
     updateHandler: (_id: string, name: string) => void
 }
-
 function Table(props: PropsType) {
-    return (
-        <table className={s.table}>
-            <thead className={s.table}>
-            <tr className={s.table}>
-                {props.tableHeaders.map((h) => {
-                    return <td className={s.table}>{h}</td>
-                })}
-            </tr>
-            </thead>
-            <tbody className={s.table}>
 
-            {props.tableDate.map((d) => {
+return (
+    <table className={s.table}>
+        <thead className={s.table}>
+        <tr className={s.table}>
+            {props.tableHeaders.map((h) => {
+                return <td className={s.table}>{h}</td>
+            })}
+        </tr>
+        </thead>
+        <tbody className={s.table}>
+
+        {props.tableDate.map((d) => {
                 return <tr className={s.table}>
                     <td className={s.table}>{d.firstCell}</td>
                     <td className={s.table}>{d.secondCell}</td>
@@ -35,7 +35,7 @@ function Table(props: PropsType) {
                             variant={'outlined'}
                             color={"primary"}
                             size={"small"}
-                            onClick={() => props.deleteHandler(d.cardsPack_id)}
+                            onClick={() => props.deleteHandler(d._id)}
                         >
                             Delete
                         </Button>
@@ -53,13 +53,16 @@ function Table(props: PropsType) {
 
                 </tr>
 
-            })}
+            }
+
+        )
+        }
 
             </tbody>
 
-        </table>
+            </table>
 
-    )
-}
+            )
+        }
 
-export default Table;
+        export default Table;

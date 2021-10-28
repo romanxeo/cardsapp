@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 import {CardType} from "../../api/cardsAPI";
-import {fetchCardsTC} from "../../store/cardsReducer";
+import {addCardTC, deleteCardTC, fetchCardsTC} from "../../store/cardsReducer";
 import {useParams} from "react-router-dom";
 import Cards from "./Cards";
 
@@ -19,11 +19,28 @@ function CardsContainer() {
         firstCell: c.question,
         secondCell: c.answer,
         thirdCell: c.grade,
-        forthCell: c.updated
+        forthCell: c.updated,
+        _id: c._id,
+
     }))
+
+    const addCardHandler = (cardsPack_id: string) => {
+        dispatch(addCardTC(cardsPack_id, "test question", "test answer", 0))
+    }
+
+    const deleteCardHandler = (_id: string) => {
+        dispatch(deleteCardTC(_id, cardsPack_id))
+    }
+
     return (
         <Cards
-            cardsForTable = {cardsForTable }/>
+            cardsForTable = {cardsForTable}
+            cardsPack_id = {cardsPack_id}
+            addCardHandler={addCardHandler}
+            deleteCardHandler = {deleteCardHandler}
+
+
+        />
     )
 }
 

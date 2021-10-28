@@ -31,7 +31,7 @@ function PacksContainer() {
         firstCell: p.name,
         secondCell: p.cardsCount,
         thirdCell: p.updated,
-        cardsPack_id: p._id
+        _id: p._id
     }))
 
     return (
