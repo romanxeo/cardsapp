@@ -22,8 +22,13 @@ export const setUserData = "profile/SET-USER-DATA"
 export const ProfileReducer = (state: InitStateType = initState, action: ActionProfileType): InitStateType => {
     switch (action.type) {
         case setUserData: {
-            debugger
-            return {...state, name: action.name, avatar: action.avatar, _id: action._id, publicCardPacksCount: action.publicCardPacksCount}
+            return {
+                ...state,
+                name: action.name,
+                avatar: action.avatar,
+                _id: action._id,
+                publicCardPacksCount: action.publicCardPacksCount
+            }
         }
         default: {
             return state

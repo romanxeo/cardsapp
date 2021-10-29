@@ -58,7 +58,7 @@ export const packsAPI = {
             user_id = `&user_id=${_id}`
         }
 
-        return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}`+user_id)
+        return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}` + user_id)
 
     },
     addPack(name: string, isPrivate: boolean) {
@@ -76,7 +76,6 @@ export const packsAPI = {
         const payload = {
             cardsPack: {name, _id}
         }
-        debugger
         return instance.put<PackType>(`cards/pack`, payload)
     }
 }
@@ -87,17 +86,21 @@ export const trainingCardsAPI = {
     },
     addCard(cardsPack_id: string, question: string, answer: string, grade: number) {
         const payload = {
-            card: {cardsPack_id,question, answer, grade},
-
+            card: {cardsPack_id, question, answer, grade},
         }
         return instance.post<CardType>(`cards/card`, payload)
     },
-    deleteCard(_id: string)  {
+    deleteCard(_id: string) {
         return instance.delete<CardType>(`cards/card?id=${_id}`)
-},
+    },
+    updateCard(_id: string, question: string, answer: string, grade: number) {
+        const payload = {
+            card: {_id, question, answer, grade},
+        }
+        return instance.put<CardType>(`cards/card`, payload)
+    }
 
 }
-
 
 
 export type LoginParamsType = {
@@ -128,7 +131,7 @@ export type PacksResponseType = {
     cardPacks: Array<PackType>
     cardPacksTotalCount: number // количество колод
     maxCardsCount: number
-    minCardsCount:number
+    minCardsCount: number
     page: number// выбранная страница
     pageCount: number // количество элементов на странице
 }

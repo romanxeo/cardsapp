@@ -204,14 +204,6 @@ export const changePageTC = (page: number) => async (dispatch: any) => {
 }
 
 
-//type InitStateType = typeof initState;
-// type addPacksACType = ReturnType<typeof addPacksAC>
-// const addPack = "packs/ADD-PACK"
-//export const initState: Array<PackType> = []
-// export const addPacksAC = () => ({
-//     type: addPack
-// } as const)
-
 
 
 export const addPackTC = (name: string, isPrivate: boolean): ThunkType => {

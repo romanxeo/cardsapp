@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './Packs.module.css'
 import Button from "@material-ui/core/Button";
 import Table from "../../common/Table/Table";
@@ -8,7 +8,7 @@ type PropsType = {
     packsForTable: Array<any>
     addPackHandler: () => void
     deletePackHandler: (_id: string) => void
-    updatePackHandler: (_id: string, name: string) => void
+    updatePackHandler: (_id: string) => void
 }
 
 

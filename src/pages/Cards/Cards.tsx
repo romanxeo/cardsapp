@@ -7,6 +7,8 @@ type PropsType = {
     addCardHandler: (cardsPack_id: string) => void
     cardsPack_id: string
     deleteCardHandler: (cardsPack_id: string, _id?: string) => void
+    updateCardCardHandler: (cardsPack_id: string) => void
+
 }
 
 function Cards(props: PropsType) {
@@ -25,7 +27,8 @@ function Cards(props: PropsType) {
                 tableHeaders={["Question", "Answer", "Grade", "Updated", "Delete card", "Update card"]}
                 tableDate={props.cardsForTable}
                 deleteHandler={props.deleteCardHandler}
-                updateHandler ={(_id: string, name: string) => {}}
+                updateHandler={props.updateCardCardHandler}
+
             />
         </div>
     )

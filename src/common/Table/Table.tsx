@@ -6,8 +6,8 @@ import {NavLink} from 'react-router-dom';
 type PropsType = {
     tableHeaders: Array<string>
     tableDate: Array<any>
-    deleteHandler: (cardsPack_id: string) => void
-    updateHandler: (_id: string, name: string) => void
+    deleteHandler: (_id: string) => void
+    updateHandler: (_id: string) => void
 }
 
 function Table(props: PropsType) {
@@ -46,7 +46,7 @@ function Table(props: PropsType) {
                                 variant={'outlined'}
                                 color={"primary"}
                                 size={"small"}
-                                onClick={() => props.updateHandler(d._id, "Updated name")}
+                                onClick={() => props.updateHandler(d._id)}
                             >
                                 Update
                             </Button>

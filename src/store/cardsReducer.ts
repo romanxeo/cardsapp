@@ -62,8 +62,23 @@ export const addCardTC = (cardsPack_id: string, question: string, answer: string
 export const deleteCardTC = (_id:string, cardsPack_id: string): ThunkType => {
     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsCardsType>) => {
         dispatch(setLoadingStatusAC('loading'));
-        debugger
         trainingCardsAPI.deleteCard(_id)
+            .then(() => {
+                dispatch(fetchCardsTC(cardsPack_id));
+                dispatch(setLoadingStatusAC('idle'));
+            })
+            .catch((e) => {
+                dispatch(setLoadingStatusAC('idle'))
+                const error = e.response ? e.response.data.error : e.message
+                dispatch(setAppErrorAC(error))
+            })
+    }
+}
+
+export const updateCardTC = (cardsPack_id: string, _id: string, question: string, answer: string, grade: number): ThunkType => {
+    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsCardsType>) => {
+        dispatch(setLoadingStatusAC('loading'));
+        trainingCardsAPI.updateCard(_id, question, answer, grade)
             .then(() => {
                 dispatch(fetchCardsTC(cardsPack_id));
                 dispatch(setLoadingStatusAC('idle'));
