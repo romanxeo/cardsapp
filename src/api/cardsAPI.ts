@@ -52,8 +52,15 @@ export const cardsAPI = {
 }
 
 export const packsAPI = {
-    getPacks() {
-        return instance.get<PacksResponseType>('cards/pack')
+    getPacks(isMyPacks: boolean, _id: string, pageCount: number, page: number) {
+        //debugger
+        let user_id = ''
+        if (isMyPacks) {
+            user_id = `&user_id=${_id}`
+        }
+
+        return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}`+user_id)
+
     },
     addPack(name: string, isPrivate: boolean) {
         const payload = {

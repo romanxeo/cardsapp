@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Packs.module.css'
 import Button from "@material-ui/core/Button";
 import Table from "../../common/Table/Table";
