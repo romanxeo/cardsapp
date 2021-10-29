@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/cardsapp/static/css/main.04183d3b.chunk.css",
-    "main.js": "/cardsapp/static/js/main.9ec56c29.chunk.js",
-    "main.js.map": "/cardsapp/static/js/main.9ec56c29.chunk.js.map",
-    "runtime-main.js": "/cardsapp/static/js/runtime-main.4443fa2d.js",
-    "runtime-main.js.map": "/cardsapp/static/js/runtime-main.4443fa2d.js.map",
-    "static/js/2.700553ce.chunk.js": "/cardsapp/static/js/2.700553ce.chunk.js",
-    "static/js/2.700553ce.chunk.js.map": "/cardsapp/static/js/2.700553ce.chunk.js.map",
-    "static/js/3.2de42421.chunk.js": "/cardsapp/static/js/3.2de42421.chunk.js",
-    "static/js/3.2de42421.chunk.js.map": "/cardsapp/static/js/3.2de42421.chunk.js.map",
+    "main.css": "/cardsapp/static/css/main.6c014f07.chunk.css",
+    "main.js": "/cardsapp/static/js/main.cd74038b.chunk.js",
+    "main.js.map": "/cardsapp/static/js/main.cd74038b.chunk.js.map",
+    "runtime-main.js": "/cardsapp/static/js/runtime-main.e3886c6c.js",
+    "runtime-main.js.map": "/cardsapp/static/js/runtime-main.e3886c6c.js.map",
+    "static/js/2.a9deaaca.chunk.js": "/cardsapp/static/js/2.a9deaaca.chunk.js",
+    "static/js/2.a9deaaca.chunk.js.map": "/cardsapp/static/js/2.a9deaaca.chunk.js.map",
+    "static/js/3.2eb8fd56.chunk.js": "/cardsapp/static/js/3.2eb8fd56.chunk.js",
+    "static/js/3.2eb8fd56.chunk.js.map": "/cardsapp/static/js/3.2eb8fd56.chunk.js.map",
     "index.html": "/cardsapp/index.html",
-    "static/css/main.04183d3b.chunk.css.map": "/cardsapp/static/css/main.04183d3b.chunk.css.map",
-    "static/js/2.700553ce.chunk.js.LICENSE.txt": "/cardsapp/static/js/2.700553ce.chunk.js.LICENSE.txt",
+    "static/css/main.6c014f07.chunk.css.map": "/cardsapp/static/css/main.6c014f07.chunk.css.map",
+    "static/js/2.a9deaaca.chunk.js.LICENSE.txt": "/cardsapp/static/js/2.a9deaaca.chunk.js.LICENSE.txt",
     "static/media/iconEmail.f254994b.png": "/cardsapp/static/media/iconEmail.f254994b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4443fa2d.js",
-    "static/js/2.700553ce.chunk.js",
-    "static/css/main.04183d3b.chunk.css",
-    "static/js/main.9ec56c29.chunk.js"
+    "static/js/runtime-main.e3886c6c.js",
+    "static/js/2.a9deaaca.chunk.js",
+    "static/css/main.6c014f07.chunk.css",
+    "static/js/main.cd74038b.chunk.js"
   ]
 }
