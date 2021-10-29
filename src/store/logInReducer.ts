@@ -69,7 +69,6 @@ export const loginTC = (data: LoginParamsType) => {
         dispatch(setLoadingStatusAC('loading'))
         cardsAPI.login(data)
             .then(res => {
-                debugger
                 dispatch(setIsLoggedInAC(true))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))

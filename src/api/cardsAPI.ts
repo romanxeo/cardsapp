@@ -53,7 +53,6 @@ export const cardsAPI = {
 
 export const packsAPI = {
     getPacks(isMyPacks: boolean, _id: string, pageCount: number, page: number) {
-        //debugger
         let user_id = ''
         if (isMyPacks) {
             user_id = `&user_id=${_id}`
@@ -77,6 +76,7 @@ export const packsAPI = {
         const payload = {
             cardsPack: {name, _id}
         }
+        debugger
         return instance.put<PackType>(`cards/pack`, payload)
     }
 }

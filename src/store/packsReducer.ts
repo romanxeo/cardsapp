@@ -167,7 +167,6 @@ export const fetchPacksTC = () => (dispatch: any, getState: () => AppRootStateTy
     const _id = getState().Profile._id
     const pageCount = getState().Packs.pageCount
     const page = getState().Packs.page
-    debugger
     dispatch(setLoadingStatusAC('loading'))
     packsAPI.getPacks(isMyPacks, _id, pageCount, page)
         .then((res) => {

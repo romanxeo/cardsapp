@@ -27,9 +27,12 @@ function PacksContainer() {
         dispatch(deletePackTC(_id))
     }
     const updatePackHandler = (_id: string, name: string) => {
+        // debugger
         dispatch(updatePackTC(_id, name))
     }
-    const packsForTable = packs.map((p) => ({
+    const packsForTable = packs.map((p) => (
+        {
+
         firstCell: p.name,
         secondCell: p.cardsCount,
         thirdCell: p.updated,
