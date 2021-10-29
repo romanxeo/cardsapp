@@ -52,13 +52,25 @@ export const cardsAPI = {
 }
 
 export const packsAPI = {
-    getPacks(isMyPacks: boolean, _id: string, pageCount: number, page: number) {
+    getPacks(isMyPacks: boolean,
+             _id: string,
+             pageCount: number,
+             page: number,
+             sortPacks: 0 | 'update',
+             _name: string,
+             allMin: number,
+             allMax: number) {
+        //debugger
         let user_id = ''
         if (isMyPacks) {
             user_id = `&user_id=${_id}`
         }
+        let packName = ''
+        if (_name) {
+            packName = `&packName=${_name}`
+        }
 
-        return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}` + user_id)
+        return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}&sortPacks=${sortPacks}&min=${allMin}&max=${allMax}`+user_id+packName)
 
     },
     addPack(name: string, isPrivate: boolean) {
