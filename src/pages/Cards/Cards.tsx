@@ -28,7 +28,7 @@ function Cards(props: PropsType) {
                 tableDate={props.cardsForTable}
                 deleteHandler={props.deleteCardHandler}
                 updateHandler={props.updateCardCardHandler}
-
+                questionText={"Do you really want to delete this card?"}
             />
         </div>
     )

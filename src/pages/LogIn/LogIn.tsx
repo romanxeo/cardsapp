@@ -30,8 +30,8 @@ export const LogIn = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: 'romanxeo@gmail.com',
-            password: 'dubfrufp37',
+            email: 'olga_gladkova@tut.by',
+            password: 'trener28',
             rememberMe: false
         },
         validate: (values) => {

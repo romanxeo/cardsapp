@@ -2,12 +2,14 @@ import React from 'react';
 import s from './Table.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink} from 'react-router-dom';
+import ModalQuestionContainer from "../Modals/ModalQuestion/ModalQuestionContainer";
 
 type PropsType = {
     tableHeaders: Array<string>
     tableDate: Array<any>
     deleteHandler: (_id: string) => void
     updateHandler: (_id: string) => void
+    questionText: string
 }
 
 function Table(props: PropsType) {
@@ -24,6 +26,9 @@ function Table(props: PropsType) {
             <tbody className={s.table}>
 
             {props.tableDate.map((d) => {
+                    const onClickHandler = (answer: boolean) => {
+                        answer && props.deleteHandler(d._id)
+                    }
                     return <tr className={s.table}>
                         <td className={s.table}>{d.firstCell}</td>
                         <td className={s.table}>{d.secondCell}</td>
@@ -32,14 +37,19 @@ function Table(props: PropsType) {
                             {d.forthCell ? d.forthCell : <NavLink to={`/Cards/${d._id}`}>Cards</NavLink>}
                         </td>
                         <td className={s.table}>
-                            <Button
-                                variant={'outlined'}
-                                color={"primary"}
-                                size={"small"}
-                                onClick={() => props.deleteHandler(d._id)}
-                            >
-                                Delete
-                            </Button>
+                            <ModalQuestionContainer
+                                questionText={props.questionText}
+                                onClickHandler={onClickHandler}
+                                buttonName={"Delete"}
+                            />
+                            {/*<Button*/}
+                            {/*    variant={'outlined'}*/}
+                            {/*    color={"primary"}*/}
+                            {/*    size={"small"}*/}
+                            {/*    onClick={() => props.deleteHandler(d._id)}*/}
+                            {/*>*/}
+                            {/*    Delete*/}
+                            {/*</Button>*/}
                         </td>
                         <td className={s.table}>
                             <Button

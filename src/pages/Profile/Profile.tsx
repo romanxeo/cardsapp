@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Profile.module.css"
 import cs from "../../common/commonStyles.module.css";
 import Button from '@material-ui/core/Button';
+import ModalQuestionContainer from "../../common/Modals/ModalQuestion/ModalQuestionContainer";
 
 type ProfilePropsType = {
     name: string
@@ -11,6 +12,8 @@ type ProfilePropsType = {
 }
 
 function Profile(props: ProfilePropsType) {
+
+
 
     return (
         <div className={cs.background}>
@@ -26,6 +29,9 @@ function Profile(props: ProfilePropsType) {
                         onClick={props.onClickHandler}>
                         Edit profile
                     </Button>
+
+
+
                 </div>
 
             </div>
