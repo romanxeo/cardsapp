@@ -24,7 +24,6 @@ function Table(props: PropsType) {
             </tr>
             </thead>
             <tbody className={s.table}>
-
             {props.tableDate.map((d) => {
                     const onClickHandler = (answer: boolean) => {
                         answer && props.deleteHandler(d._id)
