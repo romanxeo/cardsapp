@@ -1,10 +1,19 @@
 import React, {ChangeEvent} from 'react'
-import {changePageTC, isMyPacksTC, switchPageCountTC} from "../../../store/packsReducer";
+import {
+    changePageTC,
+    changeRangeTC,
+    isMyPacksTC,
+    packNameTC,
+    sortPacksTC,
+    switchPageCountTC
+} from "../../../store/packsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../store/store";
-import { Checkbox } from '@material-ui/core';
-import {Button, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {Checkbox} from '@material-ui/core';
+import {Button, Input, MenuItem, Select, SelectChangeEvent, TextField} from '@mui/material';
 import s from './SortPacks.module.css'
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 const SortPacks = () => {
 
@@ -13,6 +22,13 @@ const SortPacks = () => {
     let pageCount = useSelector<AppRootStateType, number>(state => state.Packs.pageCount);
     let page = useSelector<AppRootStateType, number>(state => state.Packs.page);
     let pagesButtonSwitcher = useSelector<AppRootStateType, Array<number>>(state => state.Packs.pagesButtonSwitcher);
+    let sortPacks = useSelector<AppRootStateType, 0 | 'update'>(state => state.Packs.sortPacks);
+    let packName = useSelector<AppRootStateType, string>(state => state.Packs.packName)
+    let maxCardsCount = useSelector<AppRootStateType, number>(state => state.Packs.maxCardsCount);
+    let minCardsCount = useSelector<AppRootStateType, number>(state => state.Packs.minCardsCount);
+    let allMin = useSelector<AppRootStateType, number>(state => state.Packs.allMin);
+    let allMax = useSelector<AppRootStateType, number>(state => state.Packs.allMax);
+
     const dispatch = useDispatch()
 
     const isMyPacksOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +38,16 @@ const SortPacks = () => {
     const switchPageCount = (e: SelectChangeEvent<string>) => {
         const val = Number(e.target.value)
         dispatch(switchPageCountTC(val))
+    }
+
+    /*const [value, setValue] = React.useState<number[]>([20, 37]);
+
+
+    };*/
+
+    const changeRange = (e: any) => {
+        //console.log(e.target.value)
+        dispatch(changeRangeTC(e.target.value[0], e.target.value[1]))
     }
 
     return (
@@ -63,13 +89,50 @@ const SortPacks = () => {
                         }}>{b}</Button>
                 )}
             </div>
+            <div>
+                Sort by:
+                <Button
+                    size="small"
+                    variant={sortPacks === 'update' ? "contained" : "text"}
+                    onClick={(e) => {
+                        dispatch(sortPacksTC('update'))
+                    }}
+                >Up</Button>
+                <Button
+                    size="small"
+                    variant={sortPacks === 0 ? "contained" : "text"}
+                    onClick={(e) => {
+                        dispatch(sortPacksTC(0))
+                    }}
+                >Down</Button>
+            </div>
+            <div>
+                Search:
+                <TextField
+                    id="filled-basic"
+                    label="Filled"
+                    variant="filled"
+                    value={packName}
+                    onChange={(e)=>{dispatch(packNameTC(e.target.value))}}
+                />
+            </div>
+            <div style={{'width': '300px', 'margin': '20px'}}>
+
+                    <Slider
+                        min={minCardsCount}
+                        max={maxCardsCount}
+                        value={[allMin, allMax]}
+                        onChange={(e) => {changeRange(e)}}
+                        valueLabelDisplay="auto"
+                    />
+
+            </div>
         </div>
     )
 }
 
 export default SortPacks
-
-
+/*changeRangeTC*/
 
 /*
 <Button

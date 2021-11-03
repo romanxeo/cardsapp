@@ -28,12 +28,27 @@ export const pagesButtonSwitcherAC = () => ({
     type: "packs/PAGES-BUTTON-SWITCHER"
 } as const)
 
+export const sortPacksAC = (sortPacks: 0 | 'update') => ({
+    type: "packs/SORT-PACKS", sortPacks
+} as const)
+
+export const packNameAC = (packName: string) => ({
+    type: "packs/PACK-NAME", packName
+} as const)
+
+export const changeRangeAC = (allMin: number, allMax: number) => ({
+    type: "packs/CHANGE-RANGE", allMin, allMax
+} as const)
+
 type getPacksAT = ReturnType<typeof getPacksAC>
 type isMyPacksAT = ReturnType<typeof isMyPacksAC>
 type allPacksDataAT = ReturnType<typeof allPacksDataAC>
 type switchPageCountAT = ReturnType<typeof switchPageCountAC>
 type changePageAT = ReturnType<typeof changePageAC>
 type pagesButtonSwitcherAT = ReturnType<typeof pagesButtonSwitcherAC>
+type sortPacksAT = ReturnType<typeof sortPacksAC>
+type packNameAT = ReturnType<typeof packNameAC>
+type changeRangeAT = ReturnType<typeof changeRangeAC>
 
 export type ActionsPacksType = setLoadingStatusAT
     | setAppErrorAT
@@ -43,6 +58,9 @@ export type ActionsPacksType = setLoadingStatusAT
     | switchPageCountAT
     | changePageAT
     | pagesButtonSwitcherAT
+    | sortPacksAT
+    | packNameAT
+    | changeRangeAT
 
 
 export type InitialStateType = {
@@ -54,6 +72,10 @@ export type InitialStateType = {
     page: number,
     pageCount: number
     pagesButtonSwitcher: Array<number>
+    sortPacks: 0 | 'update'
+    packName: string
+    allMax: number,
+    allMin: number
 }
 
 const initialState: InitialStateType = {
@@ -64,7 +86,11 @@ const initialState: InitialStateType = {
     minCardsCount: 0,
     page: 1,
     pageCount: 10,
-    pagesButtonSwitcher: []
+    pagesButtonSwitcher: [],
+    sortPacks: 0,
+    packName: '',
+    allMax: 0,
+    allMin: 0
 }
 
 
@@ -83,7 +109,8 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
                 maxCardsCount: action.maxCardsCount,
                 minCardsCount: action.minCardsCount,
                 page: action.page,
-                pageCount: action.pageCount
+                pageCount: action.pageCount,
+                allMax: state.allMax === 0 ? action.maxCardsCount : state.allMax
             }
         }
         case "packs/SWITCH-PAGE-COUNT": {
@@ -136,6 +163,25 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
                 pagesButtonSwitcher: [...pagesButtonSwitcherNew]
             }
         }
+        case "packs/SORT-PACKS": {
+            return {
+                ...state,
+                sortPacks: action.sortPacks
+            }
+        }
+        case "packs/PACK-NAME": {
+            return {
+                ...state,
+                packName: action.packName
+            }
+        }
+        case "packs/CHANGE-RANGE": {
+            return {
+                ...state,
+                allMin: action.allMin,
+                allMax: action.allMax
+            }
+        }
         default: {
             return state
         }
@@ -167,8 +213,13 @@ export const fetchPacksTC = () => (dispatch: any, getState: () => AppRootStateTy
     const _id = getState().Profile._id
     const pageCount = getState().Packs.pageCount
     const page = getState().Packs.page
+    const sortPacks = getState().Packs.sortPacks
+    const packName = getState().Packs.packName
+    const allMin = getState().Packs.allMin
+    const allMax = getState().Packs.allMax
+    //debugger
     dispatch(setLoadingStatusAC('loading'))
-    packsAPI.getPacks(isMyPacks, _id, pageCount, page)
+    packsAPI.getPacks(isMyPacks, _id, pageCount, page, sortPacks, packName, allMin, allMax)
         .then((res) => {
             dispatch(getPacksAC(res.data.cardPacks))
             dispatch(allPacksDataAC(res.data.cardPacksTotalCount, res.data.maxCardsCount, res.data.minCardsCount, res.data.page, res.data.pageCount))
@@ -199,6 +250,27 @@ export const switchPageCountTC = (pageCount: number) => async (dispatch: any) =>
 export const changePageTC = (page: number) => async (dispatch: any) => {
     await dispatch(setLoadingStatusAC('loading'));
     await dispatch(changePageAC(page))
+    await dispatch(fetchPacksTC())
+    await dispatch(setLoadingStatusAC('idle'))
+}
+
+export const sortPacksTC = (sortPacks: 0 | 'update') => async (dispatch: any) => {
+    await dispatch(setLoadingStatusAC('loading'));
+    await dispatch(sortPacksAC(sortPacks))
+    await dispatch(fetchPacksTC())
+    await dispatch(setLoadingStatusAC('idle'))
+}
+
+export const packNameTC = (packName: string) => async (dispatch: any) => {
+    await dispatch(setLoadingStatusAC('loading'));
+    await dispatch(packNameAC(packName))
+    await dispatch(fetchPacksTC())
+    await dispatch(setLoadingStatusAC('idle'))
+}
+
+export const changeRangeTC = (allMin: number, allMax: number) => async (dispatch: any) => {
+    await dispatch(setLoadingStatusAC('loading'));
+    await dispatch(changeRangeAC(allMin, allMax))
     await dispatch(fetchPacksTC())
     await dispatch(setLoadingStatusAC('idle'))
 }
