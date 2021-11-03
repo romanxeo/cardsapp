@@ -28,7 +28,7 @@ export const pagesButtonSwitcherAC = () => ({
     type: "packs/PAGES-BUTTON-SWITCHER"
 } as const)
 
-export const sortPacksAC = (sortPacks: 0 | 'update') => ({
+export const sortPacksAC = (sortPacks: string | null) => ({
     type: "packs/SORT-PACKS", sortPacks
 } as const)
 
@@ -72,7 +72,7 @@ export type InitialStateType = {
     page: number,
     pageCount: number
     pagesButtonSwitcher: Array<number>
-    sortPacks: 0 | 'update'
+    sortPacks: string | null
     packName: string
     allMax: number,
     allMin: number
@@ -87,7 +87,7 @@ const initialState: InitialStateType = {
     page: 1,
     pageCount: 10,
     pagesButtonSwitcher: [],
-    sortPacks: 0,
+    sortPacks: null,
     packName: '',
     allMax: 0,
     allMin: 0
@@ -254,7 +254,7 @@ export const changePageTC = (page: number) => async (dispatch: any) => {
     await dispatch(setLoadingStatusAC('idle'))
 }
 
-export const sortPacksTC = (sortPacks: 0 | 'update') => async (dispatch: any) => {
+export const sortPacksTC = (sortPacks: string | null) => async (dispatch: any) => {
     await dispatch(setLoadingStatusAC('loading'));
     await dispatch(sortPacksAC(sortPacks))
     await dispatch(fetchPacksTC())

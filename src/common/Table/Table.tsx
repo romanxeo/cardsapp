@@ -22,7 +22,6 @@ function Table(props: PropsType) {
             </tr>
             </thead>
             <tbody className={s.table}>
-
             {props.tableDate.map((d) => {
                     return <tr className={s.table}>
                         <td className={s.table}>{d.firstCell}</td>

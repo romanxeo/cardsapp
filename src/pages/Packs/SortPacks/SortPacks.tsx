@@ -14,6 +14,7 @@ import {Button, Input, MenuItem, Select, SelectChangeEvent, TextField} from '@mu
 import s from './SortPacks.module.css'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import SortButton from "../../../common/SortButton/SortButton";
 
 const SortPacks = () => {
 
@@ -22,7 +23,7 @@ const SortPacks = () => {
     let pageCount = useSelector<AppRootStateType, number>(state => state.Packs.pageCount);
     let page = useSelector<AppRootStateType, number>(state => state.Packs.page);
     let pagesButtonSwitcher = useSelector<AppRootStateType, Array<number>>(state => state.Packs.pagesButtonSwitcher);
-    let sortPacks = useSelector<AppRootStateType, 0 | 'update'>(state => state.Packs.sortPacks);
+    let sortPacks = useSelector<AppRootStateType, string | null>(state => state.Packs.sortPacks);
     let packName = useSelector<AppRootStateType, string>(state => state.Packs.packName)
     let maxCardsCount = useSelector<AppRootStateType, number>(state => state.Packs.maxCardsCount);
     let minCardsCount = useSelector<AppRootStateType, number>(state => state.Packs.minCardsCount);
@@ -91,20 +92,12 @@ const SortPacks = () => {
             </div>
             <div>
                 Sort by:
-                <Button
-                    size="small"
-                    variant={sortPacks === 'update' ? "contained" : "text"}
-                    onClick={(e) => {
-                        dispatch(sortPacksTC('update'))
-                    }}
-                >Up</Button>
-                <Button
-                    size="small"
-                    variant={sortPacks === 0 ? "contained" : "text"}
-                    onClick={(e) => {
-                        dispatch(sortPacksTC(0))
-                    }}
-                >Down</Button>
+                <SortButton sortDir={'1name'} nameButton={'Up Name'}/>
+                <SortButton sortDir={'0name'} nameButton={'Down Name'}/>
+                <SortButton sortDir={'1cardsCount'} nameButton={'Up Cards Count'}/>
+                <SortButton sortDir={'0cardsCount'} nameButton={'Down Cards Count'}/>
+                <SortButton sortDir={'1updated'} nameButton={'Up Updated'}/>
+                <SortButton sortDir={'0updated'} nameButton={'Down Updated'}/>
             </div>
             <div>
                 Search:

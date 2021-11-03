@@ -56,7 +56,7 @@ export const packsAPI = {
              _id: string,
              pageCount: number,
              page: number,
-             sortPacks: 0 | 'update',
+             sortPacks: string | null,
              _name: string,
              allMin: number,
              allMax: number) {
