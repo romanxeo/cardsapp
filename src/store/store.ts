@@ -8,6 +8,7 @@ import {RecoveryPasswordReducer} from "./recoveryPasswordReducer";
 import {SignUpReducer} from "./signUpReducer";
 import {packsReducer} from "./packsReducer";
 import {cardsReducer} from "./cardsReducer";
+import {learnReducer} from "./learnReducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     RecoveryPassword: RecoveryPasswordReducer,
     SignUp: SignUpReducer,
     Packs: packsReducer,
-    Cards: cardsReducer
+    Cards: cardsReducer,
+    Learn: learnReducer
 })
 
 // непосредственно создаём store

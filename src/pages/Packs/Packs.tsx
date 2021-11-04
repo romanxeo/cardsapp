@@ -23,7 +23,7 @@ function Packs(props: PropsType) {
                 onClick={props.addPackHandler}>
                 Add pack
             </Button>
-            <Table tableHeaders={["Name", "Cards count", "Updated", "Cards", "Delete pack", "Update pack" ]}
+            <Table tableHeaders={["Name", "Cards count", "Updated", "Cards", "Delete pack", "Update pack", "Learn"]}
                    tableDate={props.packsForTable}
                    deleteHandler={props.deletePackHandler}
                    updateHandler={props.updatePackHandler}

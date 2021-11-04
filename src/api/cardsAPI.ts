@@ -92,9 +92,15 @@ export const packsAPI = {
     }
 }
 
+export const learnAPI = {
+    gradeCard(grade: number, card_id: string) {
+        return instance.put<GradeDataType>(`cards/grade`, {grade, card_id})
+    }
+}
+
 export const trainingCardsAPI = {
-    getCards(cardsPack_id: string) {
-        return instance.get<CardsResponseType>(`cards/card?cardsPack_id=${cardsPack_id}`)
+    getCards(cardsPack_id: string, pageCount: number) {
+        return instance.get<CardsResponseType>(`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}`)
     },
     addCard(cardsPack_id: string, question: string, answer: string, grade: number) {
         const payload = {
@@ -168,4 +174,13 @@ export type CardsResponseType = {
     packUserId: string
     page: number
     pageCount: number
+}
+
+export type GradeDataType = {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
 }

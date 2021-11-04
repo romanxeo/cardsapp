@@ -9,10 +9,13 @@ import Cards from "./Cards";
 
 function CardsContainer() {
     const dispatch = useDispatch()
-    const cards = useSelector<AppRootStateType, CardType[]>(state => state.Cards)
+    const cards = useSelector<AppRootStateType, CardType[]>(state => state.Cards.cardsArray)
+
+    const {cardsCount} = useParams<{ cardsCount: string }>()
     const {cardsPack_id} = useParams<{ cardsPack_id: string }>()
+
     useEffect(() => {
-        dispatch(fetchCardsTC(cardsPack_id))
+        dispatch(fetchCardsTC(cardsPack_id, Number(cardsCount)))
     }, [])
 
     const cardsForTable = cards.map((c) => ({

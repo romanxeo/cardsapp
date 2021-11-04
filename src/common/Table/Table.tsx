@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Table.module.css'
 import Button from "@material-ui/core/Button";
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import ModalQuestionContainer from "../Modals/ModalQuestion/ModalQuestionContainer";
 
 type PropsType = {
@@ -33,7 +33,7 @@ function Table(props: PropsType) {
                         <td className={s.table}>{d.secondCell}</td>
                         <td className={s.table}>{d.thirdCell}</td>
                         <td className={s.table}>
-                            {d.forthCell ? d.forthCell : <NavLink to={`/Cards/${d._id}`}>Cards</NavLink>}
+                            {d.forthCell ? d.forthCell : <NavLink to={`/Cards/${d._id}/${d.secondCell}`}>Cards</NavLink>}
                         </td>
                         <td className={s.table}>
                             <ModalQuestionContainer
@@ -59,6 +59,17 @@ function Table(props: PropsType) {
                             >
                                 Update
                             </Button>
+                        </td>
+                        <td className={s.table}>
+                            <NavLink to={`/learn/${d._id}/${d.secondCell}`}>
+                                <Button
+                                    variant={'outlined'}
+                                    color={"primary"}
+                                    size={"small"}
+                                >
+                                    Learn
+                                </Button>
+                            </NavLink>
                         </td>
                     </tr>
                 }
