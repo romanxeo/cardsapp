@@ -1,10 +1,9 @@
-.background {
+/*.background {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(45deg, #d299c2, #fef9d7);
-}
-
-.blockContainer {
+}*/
+/*.blockContainer {
     width: 800px;
     height: 500px;
     background: aliceblue;
@@ -20,24 +19,39 @@
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-}
+}*/
 
 .imgContainer {
-    padding: 20px;
-    width: 300px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 196px;
+    height: 196px;
 }
 
-.text {
-    text-align: center;
-    width: 300px;
-    font-size: 20px;
+.imgAvatar {
+    width: 196px;
+    height: 196px;
+    border-radius: 10px;
+}
+
+.textBlock {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.textOne {
+    font-size: 16px;
+}
+
+.textTwo {
+    font-size: 16px;
     font-weight: bold;
-    padding: 10px 0;
 }
 
 .button {
-    padding: 30px 0;
+    margin-top: 15px;
     text-align: center;
-    width: 300px;
-
+    width: 500px;
 }

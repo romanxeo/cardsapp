@@ -5,9 +5,10 @@
     width: 100vw;
     height: 100vh;
     background-color: #333333;
-    opacity: 0.3;
+    opacity: 0.4;
     z-index: 20;
 }
+
 .modalContainer {
     width: 350px;
     height: 200px;
@@ -19,10 +20,19 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    border-radius: 10px;
 }
-.button {
 
-    margin: 15px;
+.buttonBlock {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
 
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }

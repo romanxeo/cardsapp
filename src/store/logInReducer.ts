@@ -1,7 +1,7 @@
 import {setLoadingStatusAC, setAppErrorAC, setLoadingStatusAT, setAppErrorAT} from './appReducer'
-import {LoginParamsType, cardsAPI} from "../api/cardsAPI";
-import {setUserDataAC, SetUserDataACType} from "./profileReducer";
+import {LoginParamsType, cardsAPI, UserDataType} from "../api/cardsAPI";
 import {Dispatch} from 'redux';
+import {setUserDataAC, setUserDataAT} from "./profileReducer";
 
 // actions
 export const setIsLoggedInAC = (value: boolean) =>
@@ -21,7 +21,7 @@ export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
 type actionLogInType = setIsLoggedInAT
     | buttonDisabledAT
     | setLoadingStatusAT
-    | SetUserDataACType
+    | setUserDataAT
     | setAppErrorAT
 
 const initialState = {
@@ -64,16 +64,16 @@ export const LogInReducer = (state: InitialStateType = initialState, action: act
 
 //thunk
 export const loginTC = (data: LoginParamsType) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<actionLogInType>) => {
         dispatch(buttonDisabledAC(true))
         dispatch(setLoadingStatusAC('loading'))
         cardsAPI.login(data)
             .then(res => {
+                dispatch(setUserDataAC(res.data))
                 dispatch(setIsLoggedInAC(true))
                 dispatch(buttonDisabledAC(false))
                 dispatch(setLoadingStatusAC('idle'))
-                dispatch(setUserDataAC(res.data.name, res.data.avatar ? res.data.avatar : "", res.data._id,
-                    res.data.publicCardPacksCount))
+
             })
             .catch(e => {
                 const error = e.response ? e.response.data.error : "some unknown error"
@@ -84,20 +84,31 @@ export const loginTC = (data: LoginParamsType) => {
     }
 }
 
-export const logoutTC = () => (dispatch: Dispatch<actionLogInType>) => {
-    dispatch(setLoadingStatusAC('loading'))
-    cardsAPI.logOut()
-        .then((res) => {
-            dispatch(setIsLoggedInAC(false))
-            dispatch(setLoadingStatusAC('idle'))
-            dispatch(setUserDataAC("", "", "", 0))
-        })
-        .catch(e => {
-            dispatch(setLoadingStatusAC('idle'))
-            //dispatch(setAppErrorAC("some error"))
-            const error = e.response ? e.response.data.error : e.message
-            dispatch(setAppErrorAC(error))
-        })
-
+export const logoutTC = () => {
+    return (dispatch: Dispatch<actionLogInType>) => {
+        const LogoutData: UserDataType = {
+            _id: '',
+            email: '',
+            name: '',
+            avatar: '',
+            publicCardPacksCount: 0,
+            created: '',
+            updated: '',
+            isAdmin: false,
+            verified: false,
+            rememberMe: false,
+        }
+        dispatch(setLoadingStatusAC('loading'))
+        cardsAPI.logOut()
+            .then((res) => {
+                dispatch(setUserDataAC(LogoutData))
+                dispatch(setIsLoggedInAC(false))
+                dispatch(setLoadingStatusAC('idle'))
+            })
+            .catch(e => {
+                const error = e.response ? e.response.data.error : e.message
+                dispatch(setAppErrorAC(error))
+                dispatch(setLoadingStatusAC('idle'))
+            })
+    }
 }
-

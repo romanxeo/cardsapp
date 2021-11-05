@@ -2,14 +2,17 @@ import React from 'react';
 import s from './SignUp.module.css';
 import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, Redirect} from 'react-router-dom';
 import {registerTC} from "../../store/signUpReducer";
 import {AppRootStateType} from "../../store/store";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
 
 type FormikErrorType = {
     email?: string,
@@ -120,8 +123,6 @@ const SignUp = () => {
                                 >
                                     Register
                                 </Button>
-
-
                             </div>
 
                             <div className={cs.buttonBlock}>

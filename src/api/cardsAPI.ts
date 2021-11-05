@@ -7,6 +7,31 @@ const instance = axios.create({
 })
 
 export const cardsAPI = {
+    login(data: LoginParamsType) {
+        return instance.post<UserDataType>(`/auth/login`, data)
+    },
+    me() {
+        return instance.post<UserDataType>(`auth/me`)
+    },
+    register(email: string, password: string) {
+        const payload = {
+            email,
+            password
+        }
+        const promise = instance.post<any>('auth/register', payload);
+        return promise;
+    },
+    updateProfileData(name: string, avatar: string) {
+        //change profile data
+        const payload = {
+            name,
+            avatar
+        }
+        return instance.put<UserDataType>(`auth/me`, payload)
+    },
+    logOut() {
+        return instance.delete<any>('auth/me')
+    },
     forgotPassword(email: string) {
         const payload = {
             email,
@@ -21,11 +46,6 @@ export const cardsAPI = {
         const promise = instance.post<any>('auth/forgot', payload);
         return promise;
     },
-
-    login(data: LoginParamsType) {
-        return instance.post<UserDataType>(`/auth/login`, data)
-    },
-
     setNewPassword(password: string, resetPasswordToken: string) {
         const payload = {
             password,
@@ -34,21 +54,6 @@ export const cardsAPI = {
         const promise = instance.post<any>('auth/set-new-password', payload);
         return promise;
     },
-
-    register(email: string, password: string) {
-        const payload = {
-            email,
-            password
-        }
-        const promise = instance.post<any>('auth/register', payload);
-        return promise;
-    },
-    me() {
-        return instance.post <UserDataType>(`auth/me`)
-    },
-    logOut() {
-        return instance.delete<any>('auth/me')
-    }
 }
 
 export const packsAPI = {
@@ -60,7 +65,6 @@ export const packsAPI = {
              _name: string,
              allMin: number,
              allMax: number) {
-        //debugger
         let user_id = ''
         if (isMyPacks) {
             user_id = `&user_id=${_id}`
@@ -69,18 +73,19 @@ export const packsAPI = {
         if (_name) {
             packName = `&packName=${_name}`
         }
-
         return instance.get<PacksResponseType>(`cards/pack?pageCount=${pageCount}&page=${page}&sortPacks=${sortPacks}&min=${allMin}&max=${allMax}`+user_id+packName)
-
     },
     addPack(name: string, isPrivate: boolean) {
         const payload = {
             cardsPack: {
-                name, isPrivate
+                name, ['private']: isPrivate
             }
         }
         return instance.post<PackType>('cards/pack', payload)
     },
+
+
+
     deletePack(_id: string) {
         return instance.delete<PackType>(`cards/pack?id=${_id}`)
     },
@@ -126,15 +131,19 @@ export type LoginParamsType = {
     password: string
     rememberMe: boolean
 }
-
 export type UserDataType = {
     _id: string
     email: string
     name: string
-    rememberMe?: boolean
     avatar?: string
     publicCardPacksCount: number
+    created: string
+    updated: string
+    isAdmin: boolean
+    verified: boolean
+    rememberMe: boolean
 }
+
 export type PackType = {
     _id: string
     name: string

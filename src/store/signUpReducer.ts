@@ -18,8 +18,8 @@ const completedRequestAC = (completed: boolean) => {
 export type buttonDisabledAT = ReturnType<typeof buttonDisabledAC>
 export type completedRequestAT = ReturnType<typeof completedRequestAC>
 
-export type actionSignUpType =
-    buttonDisabledAT | completedRequestAT
+export type actionSignUpType = buttonDisabledAT
+    | completedRequestAT
 
 export const initState = {
     completed: false,

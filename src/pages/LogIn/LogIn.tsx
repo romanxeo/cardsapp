@@ -5,14 +5,17 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../store/logInReducer";
 import {AppRootStateType} from "../../store/store";
 import {NavLink, Redirect} from 'react-router-dom';
 import cs from "../../common/commonStyles.module.css";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
 
 type FormikErrorType = {
     email?: string
@@ -29,8 +32,8 @@ export const LogIn = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'romanxeo@gmail.com',
+            password: 'dubfrufp37',
             rememberMe: false
         },
         validate: (values) => {

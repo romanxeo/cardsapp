@@ -2,14 +2,17 @@ import React from 'react';
 //import s from './RecoveryPassword.module.css';
 import cs from '../../common/commonStyles.module.css'
 import {useFormik} from "formik";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect, useParams} from 'react-router-dom';
 import {setNewPasswordTC} from "../../store/setNewPasswordReducer";
 import {AppRootStateType} from "../../store/store";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
 
 
 type FormikErrorType = {
