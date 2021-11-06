@@ -30,21 +30,7 @@ function PacksContainer() {
         return <Redirect to={"/login"}/>
     }
 
-    const deletePackHandler = (_id: string) => {
-        dispatch(deletePackTC(_id))
-    }
-
-    const packsForTable = cardPacks.map((p) => (
-        {
-
-            firstCell: p.name,
-            secondCell: p.cardsCount,
-            thirdCell: p.updated,
-            _id: p._id
-        }))
-
     const resultPack = cardPacks.map(p => {
-
         let date = new Date(p.updated);
         let formatter = new Intl.DateTimeFormat("ru", {
             hour: "numeric",
@@ -92,7 +78,6 @@ function PacksContainer() {
         )
     })
 
-
     return (
         <div className={s.background}>
             <div className={s.blockContainer}>
@@ -119,11 +104,6 @@ function PacksContainer() {
                 <div className={s.containerOne}>
                     <Paginator/>
                 </div>
-
-
-{/*                <Packs packsForTable={packsForTable}
-                       deletePackHandler={deletePackHandler}
-                />*/}
             </div>
         </div>
     )
