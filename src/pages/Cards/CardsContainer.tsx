@@ -27,24 +27,22 @@ function CardsContainer() {
 
     }))
 
-    const addCardHandler = (cardsPack_id: string) => {
+/*    const addCardHandler = (cardsPack_id: string) => {
         dispatch(addCardTC(cardsPack_id, "test question", "test answer", 0))
-    }
+    }*/
 
     const deleteCardHandler = (_id: string) => {
         dispatch(deleteCardTC(_id, cardsPack_id))
     }
-    const updateCardCardHandler = (_id: string) => {
+/*    const updateCardCardHandler = (_id: string) => {
         dispatch(updateCardTC(cardsPack_id, _id, "updated question", "updated answer", 1))
-    }
+    }*/
 
     return (
         <Cards
             cardsForTable={cardsForTable}
             cardsPack_id={cardsPack_id}
-            addCardHandler={addCardHandler}
             deleteCardHandler={deleteCardHandler}
-            updateCardCardHandler={updateCardCardHandler}
         />
     )
 }

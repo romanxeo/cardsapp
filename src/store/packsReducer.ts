@@ -1,11 +1,11 @@
-import {packsAPI, PackType} from "../api/cardsAPI";
+import {packsAPI, PacksResponseType, PackType} from "../api/cardsAPI";
 import {setAppErrorAC, setAppErrorAT, setLoadingStatusAC, setLoadingStatusAT} from "./appReducer";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppRootStateType} from "./store";
 
 
-export const getPacksAC = (packs: Array<PackType>) => ({
-    type: "packs/GET-PACKS", packs
+export const getPacksAC = (payload: PacksResponseType) => ({
+    type: "packs/GET-PACKS", payload
 } as const)
 
 export const isMyPacksAC = (isMyPacks: boolean) => ({
@@ -64,7 +64,7 @@ export type ActionsPacksType = setLoadingStatusAT
 
 
 export type InitialStateType = {
-    packsArray: Array<PackType>
+    cardPacks: Array<PackType>
     isMyPacks: boolean
     cardPacksTotalCount: number,
     maxCardsCount: number,
@@ -79,7 +79,7 @@ export type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    packsArray: [],
+    cardPacks: [],
     isMyPacks: false,
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
@@ -97,7 +97,9 @@ const initialState: InitialStateType = {
 export const packsReducer = (state: InitialStateType = initialState, action: ActionsPacksType): InitialStateType => {
     switch (action.type) {
         case "packs/GET-PACKS": {
-            return {...state, packsArray: action.packs}
+            console.log(state)
+            debugger
+            return {...state, ...action.payload}
         }
         case "packs/IS-MY-PACKS": {
             return {...state, isMyPacks: action.isMyPacks}
@@ -211,18 +213,18 @@ type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsPacksType>
 export const fetchPacksTC = () => (dispatch: any, getState: () => AppRootStateType) => {
     const isMyPacks = getState().Packs.isMyPacks
     const _id = getState().Profile._id
+    const packName = getState().Packs.packName
     const pageCount = getState().Packs.pageCount
     const page = getState().Packs.page
     const sortPacks = getState().Packs.sortPacks
-    const packName = getState().Packs.packName
     const allMin = getState().Packs.allMin
     const allMax = getState().Packs.allMax
     //debugger
+
     dispatch(setLoadingStatusAC('loading'))
     packsAPI.getPacks(isMyPacks, _id, pageCount, page, sortPacks, packName, allMin, allMax)
         .then((res) => {
-            dispatch(getPacksAC(res.data.cardPacks))
-            dispatch(allPacksDataAC(res.data.cardPacksTotalCount, res.data.maxCardsCount, res.data.minCardsCount, res.data.page, res.data.pageCount))
+            dispatch(getPacksAC(res.data))
             dispatch(pagesButtonSwitcherAC())
             dispatch(setLoadingStatusAC('idle'))
         })
@@ -275,15 +277,11 @@ export const changeRangeTC = (allMin: number, allMax: number) => async (dispatch
     await dispatch(setLoadingStatusAC('idle'))
 }
 
-
-
-
 export const addPackTC = (name: string, isPrivate: boolean): ThunkType => {
     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
         dispatch(setLoadingStatusAC('loading'));
         packsAPI.addPack(name, isPrivate)
             .then((res) => {
-                // dispatch(addPacksAC())
                 dispatch(fetchPacksTC())
                 dispatch(setLoadingStatusAC('idle'))
             })

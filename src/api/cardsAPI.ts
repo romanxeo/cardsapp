@@ -146,12 +146,15 @@ export type UserDataType = {
 
 export type PackType = {
     _id: string
-    name: string
-    user_id: string
     user_name: string
-    private: boolean
-    created: string
+    user_id: string
     updated: string
+    shots: number
+    rating: number
+    private: boolean
+    name: string
+    grade: number
+    created: string
     cardsCount: number
 }
 export type PacksResponseType = {

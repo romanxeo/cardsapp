@@ -3,12 +3,12 @@ import s from './Table.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink, Redirect} from 'react-router-dom';
 import ModalQuestionContainer from "../Modals/ModalQuestion/ModalQuestionContainer";
+import ModalUpdatePack from "../ModalUpdatePack/ModalUpdatePack";
 
 type PropsType = {
     tableHeaders: Array<string>
     tableDate: Array<any>
     deleteHandler: (_id: string) => void
-    updateHandler: (_id: string) => void
     questionText: string
 }
 
@@ -51,14 +51,7 @@ function Table(props: PropsType) {
                             {/*</Button>*/}
                         </td>
                         <td className={s.table}>
-                            <Button
-                                variant={'outlined'}
-                                color={"primary"}
-                                size={"small"}
-                                onClick={() => props.updateHandler(d._id)}
-                            >
-                                Update
-                            </Button>
+                            <ModalUpdatePack _id={d._id}/>
                         </td>
                         <td className={s.table}>
                             <NavLink to={`/learn/${d._id}/${d.secondCell}`}>

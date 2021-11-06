@@ -1,6 +1,6 @@
 import React from 'react'
 import {sortPacksTC} from "../../store/packsReducer";
-import {Button} from "@mui/material";
+import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../store/store";
 
