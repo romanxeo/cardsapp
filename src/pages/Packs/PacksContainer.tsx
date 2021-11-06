@@ -65,12 +65,11 @@ function PacksContainer() {
                     >
                         💡️
                     </Button>
-                    {myProfileId === p.user_id ?
+                    {myProfileId === p.user_id &&
                         <>
                         <ModalUpdatePack _id={p._id}/>
                         <ModalDeletePack _id={p._id}/>
                         </>
-                    : <></>
                     }
 
                 </div>
