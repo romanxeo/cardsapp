@@ -32,7 +32,7 @@ function App() {
                 <Route path={'/SignUp'} render={() => <SignUp/>}/>
                 <Route path={'/EditProfile'} render={() => <EditProfile/>}/>
                 <Route path={'/Packs'} render={() => <Packs/>}/>
-                <Route path={'/Cards/:cardsPack_id'} render={() => <CardsContainer/>}/>
+                <Route path={'/Cards/:cardsPack_id/:cardsCount'} render={() => <CardsContainer/>}/>
                 <Route path={'/Learn/:cardsPack_id/:cardsCount'} render={() => <Learn/>}/>
                 <Redirect from={'*'} to={'/error404'}/>
             </Switch>

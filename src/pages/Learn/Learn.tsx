@@ -28,7 +28,7 @@ const Learn = () => {
     const {cardsPack_id} = useParams<{ cardsPack_id: string }>()
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.LogIn.isLoggedIn)
-    const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.Cards.cardsArray)
+    const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.Cards.cards)
 
     const dispatch = useDispatch()
 

@@ -1,0 +1,112 @@
+.background {
+    width: 100%;
+    background: linear-gradient(45deg, #d299c2, #fef9d7);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.blockContainer {
+    width: 1040px;
+    min-height: 500px;
+    background: aliceblue;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    /*position: absolute;*/
+    /*
+
+    margin-right: -50%;*/
+    /*transform: translate(-50%, -50%);*/
+
+    border-radius: 4px;
+
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.containerOne {
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+
+.resultTitle {
+    border-bottom: #333333 2px solid;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    height: 36px;
+    padding-top: 2px;
+}
+
+.resultCard {
+    border-bottom: #333333 2px solid;
+    width: 1000px;
+    min-height: 36px;
+
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-top: 2px;
+}
+
+.question {
+    /*border: #090999 1px solid;*/
+    width: 230px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+}
+
+.spanQuestion {
+    /*border: #090999 1px solid;*/
+    width: 230px;
+    display: inline-block;
+    box-sizing: border-box;
+    min-height: 34px;
+}
+
+.answer {
+    /*border: #090999 1px solid;*/
+    width: 230px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+}
+
+.spanAnswer {
+    /*border: #090999 1px solid;*/
+    width: 230px;
+    min-height: 34px;
+    display: inline-block;
+    box-sizing: border-box;
+
+}
+
+.spanNumber {
+    /*border: #090999 1px solid;*/
+    width: 115px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+}
+
+.spanDesc {
+    padding-top: 2px;
+    /*border: #090999 1px solid;*/
+    width: 65px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+}
+
+.spanButton {
+    /*border: #090999 1px solid;*/
+    width: 195px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 34px;
+}

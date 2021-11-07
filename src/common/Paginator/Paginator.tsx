@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import Button from "@mui/material/Button";
 import {changePageTC} from "../../store/packsReducer";
 import {useDispatch, useSelector} from "react-redux";
@@ -13,6 +13,7 @@ const Paginator = () => {
         <div>
             Page: {pagesButtonSwitcher.map(b =>
                 <Button
+                    key={b}
                     size="small"
                     variant={page === b ? "contained" : "text"}
                     onClick={(e) => {

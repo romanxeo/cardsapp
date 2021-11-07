@@ -1,15 +1,15 @@
-import {CardType, trainingCardsAPI} from "../api/cardsAPI";
+import {CardsResponseType, CardType, trainingCardsAPI} from "../api/cardsAPI";
 import {setAppErrorAC, setAppErrorAT, setLoadingStatusAC, setLoadingStatusAT} from "./appReducer";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppRootStateType} from "./store";
 
 
-export const getCardsAC = (cards: Array<CardType>) => ({
-    type: "cards/GET-CARDS", cards
+export const getCardsAC = (payload: CardsResponseType) => ({
+    type: "cards/GET-CARDS", payload
 } as const)
 
-export const getCardsTotalCountAC = (cardsTotalCount: number) => ({
-    type: "cards/SET-CARDS-TOTAL-COUNT", cardsTotalCount
+export const getCardsTotalCountAC = (pageCount: number) => ({
+    type: "cards/SET-CARDS-TOTAL-COUNT", pageCount
 } as const)
 
 
@@ -23,27 +23,40 @@ export type ActionsCardsType = setLoadingStatusAT
 
 
 export type InitialStateType = {
-    cardsArray: Array<CardType>
+    cards: Array<CardType>
     cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    packUserId: string
+    page: number
+    pageCount: number
 }
 
 const initialState: InitialStateType = {
-    cardsArray: [],
-    cardsTotalCount: 0
+    cards: [],
+    cardsTotalCount: 0,
+    maxGrade: 0,
+    minGrade: 0,
+    packUserId: '',
+    page: 0,
+    pageCount: 0,
 }
 
 
 export const cardsReducer = (state: InitialStateType = initialState, action: ActionsCardsType): InitialStateType => {
     switch (action.type) {
         case "cards/GET-CARDS": {
-            return {...state, cardsArray: action.cards}
+            return {...state, ...action.payload}
         }
+
         case "cards/SET-CARDS-TOTAL-COUNT": {
             return {
                 ...state,
-                cardsTotalCount: action.cardsTotalCount
+                cardsTotalCount: action.pageCount
             }
         }
+
+
         default: {
             return state
         }
@@ -52,13 +65,14 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Act
 
 type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsCardsType>
 
-export const fetchCardsTC = (cardsPack_id: string, cardsCount: number): ThunkType => {
+export const fetchCardsTC = (cardsPack_id: string, pageCount: number): ThunkType => {
     return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsCardsType>) => {
         dispatch(setLoadingStatusAC('loading'));
-        trainingCardsAPI.getCards(cardsPack_id, cardsCount)
+        dispatch(getCardsTotalCountAC(pageCount))
+
+        trainingCardsAPI.getCards(cardsPack_id, pageCount)
             .then((res) => {
-                dispatch(getCardsAC(res.data.cards))
-                dispatch(getCardsTotalCountAC(res.data.cardsTotalCount))
+                dispatch(getCardsAC(res.data))
                 dispatch(setLoadingStatusAC('idle'))
             })
             .catch((e) => {
@@ -80,6 +94,7 @@ export const addCardTC = (cardsPack_id: string, question: string, answer: string
             .then(() => {
                 dispatch(fetchCardsTC(cardsPack_id, cardsTotalCount));
                 dispatch(setLoadingStatusAC('idle'));
+
             })
             .catch((e) => {
                 dispatch(setLoadingStatusAC('idle'))

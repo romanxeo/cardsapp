@@ -53,7 +53,7 @@ function Packs() {
         }
 
         return (
-            <div className={s.resultPack}>
+            <div className={s.resultPack} key={p._id}>
                 <div className={s.spanName}>{p.name.substring(0, 23)}</div>
                 <div className={s.spanNumber}>{p.cardsCount}</div>
                 <div className={s.spanNumber}>{p.grade}</div>
@@ -93,7 +93,6 @@ function Packs() {
     return (
         <div className={s.background}>
             <div className={s.blockContainer}>
-
                 <div className={s.containerOne}>
                     <SortPacks/>
                     <ModalAddPack/>
