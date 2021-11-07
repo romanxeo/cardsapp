@@ -12,7 +12,7 @@ import EditProfile from "./pages/EditProfile/EditProfile";
 import Header from "./pages/Header/Header";
 import ProfileContainer from "./pages/Profile/ProfileContainer";
 import StartPage from "./pages/StartPage/StartPage";
-import PacksContainer from "./pages/Packs/PacksContainer";
+import Packs from "./pages/Packs/Packs";
 import CardsContainer from "./pages/Cards/CardsContainer";
 import Learn from './pages/Learn/Learn';
 
@@ -26,14 +26,14 @@ function App() {
                 <Route exact path={'/'} render={() => <StartPage/>}/>
                 <Route path={'/SetNewPassword/:token'} render={() => <SetNewPassword/>}/>
                 <Route path={'/Error404'} render={() => <Error404/>}/>
-                <Route path={'/login'} render={() => <LogIn/>}/>
+                <Route path={'/Login'} render={() => <LogIn/>}/>
                 <Route path={'/Profile'} render={() => <ProfileContainer/>}/>
                 <Route path={'/RecoveryPassword'} render={() => <RecoveryPassword/>}/>
                 <Route path={'/SignUp'} render={() => <SignUp/>}/>
                 <Route path={'/EditProfile'} render={() => <EditProfile/>}/>
-                <Route path={'/Packs'} render={() => <PacksContainer/>}/>
+                <Route path={'/Packs'} render={() => <Packs/>}/>
                 <Route path={'/Cards/:cardsPack_id'} render={() => <CardsContainer/>}/>
-                <Route path={'/learn/:cardsPack_id/:cardsCount'} render={() => <Learn/>}/>
+                <Route path={'/Learn/:cardsPack_id/:cardsCount'} render={() => <Learn/>}/>
                 <Redirect from={'*'} to={'/error404'}/>
             </Switch>
             <ErrorSnackbar/>

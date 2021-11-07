@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Profile.module.css"
 import cs from "../../common/commonStyles.module.css";
 import Button from '@material-ui/core/Button';
-import ModalQuestionContainer from "../../common/Modals/ModalQuestion/ModalQuestionContainer";
+import ModalQuestionContainer from "../../_OLD/ModalQuestionContainer";
 import {UserDataType} from "../../api/cardsAPI";
 import noAvatar from '../../assets/noAvatar/noAvatar.png'
 

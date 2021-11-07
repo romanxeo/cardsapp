@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Table.module.css'
 import Button from "@material-ui/core/Button";
 import {NavLink, Redirect} from 'react-router-dom';
-import ModalQuestionContainer from "../Modals/ModalQuestion/ModalQuestionContainer";
+import ModalQuestionContainer from "../../_OLD/ModalQuestionContainer";
 import ModalUpdatePack from "../ModalUpdatePack/ModalUpdatePack";
 
 type PropsType = {

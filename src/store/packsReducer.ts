@@ -97,23 +97,14 @@ const initialState: InitialStateType = {
 export const packsReducer = (state: InitialStateType = initialState, action: ActionsPacksType): InitialStateType => {
     switch (action.type) {
         case "packs/GET-PACKS": {
-            console.log(state)
-            debugger
-            return {...state, ...action.payload}
+            return {
+                ...state,
+                ...action.payload,
+                allMax: state.allMax === 0 ? action.payload.maxCardsCount : state.allMax
+            }
         }
         case "packs/IS-MY-PACKS": {
             return {...state, isMyPacks: action.isMyPacks}
-        }
-        case "packs/ALL-PACKS-DATA": {
-            return {
-                ...state,
-                cardPacksTotalCount: action.cardPacksTotalCount,
-                maxCardsCount: action.maxCardsCount,
-                minCardsCount: action.minCardsCount,
-                page: action.page,
-                pageCount: action.pageCount,
-                allMax: state.allMax === 0 ? action.maxCardsCount : state.allMax
-            }
         }
         case "packs/SWITCH-PAGE-COUNT": {
             return {
@@ -191,23 +182,6 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
 }
 
 type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsPacksType>
-
-//thunk
-/*export const fetchPacksTC = (): ThunkType => {
-    return (dispatch: ThunkDispatch<AppRootStateType, unknown, ActionsPacksType>) => {
-        dispatch(setLoadingStatusAC('loading'))
-        packsAPI.getPacks()
-            .then((res) => {
-                dispatch(getPacksAC(res.data.cardPacks))
-                dispatch(setLoadingStatusAC('idle'))
-            })
-            .catch((e) => {
-                dispatch(setLoadingStatusAC('idle'))
-                const error = e.response ? e.response.data.error : e.message
-                dispatch(setAppErrorAC(error))
-            })
-    }
-}*/
 
 //thunk
 export const fetchPacksTC = () => (dispatch: any, getState: () => AppRootStateType) => {
